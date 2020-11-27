@@ -1,3 +1,5 @@
+package Server;
+import Checkers;
 
 /*
  * Class for the board to be played on

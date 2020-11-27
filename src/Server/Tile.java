@@ -1,3 +1,4 @@
+package Server;
 
 /*
  * Class for an individual spot on the overall board
