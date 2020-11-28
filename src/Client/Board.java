@@ -1,5 +1,6 @@
-package Server;
+package Client;
 import Checkers;
+import Server.Tile;
 
 /*
  * Class for the board to be played on
