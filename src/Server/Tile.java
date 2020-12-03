@@ -38,7 +38,7 @@ class Tile {
 		this.playerID=playerID;
 	}
 	
-	public int getPlayerID(int playerID) {
+	public int getPlayerID() {
 		return this.playerID;
 	}
 	
