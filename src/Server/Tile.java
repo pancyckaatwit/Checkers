@@ -26,7 +26,7 @@ class Tile {
 		}
 	}
 	
-	public boolean getIsOcuupied() {
+	public boolean getIsOccupied() {
 		return isOccupied;
 	}
 	
