@@ -25,10 +25,34 @@ public class ServerPlayer {
 	}
 	
 	public int sendData(int data) {
-		
+		try {
+			this.outFromPlayer.writeInt(data);
+			return 1;
+		}catch(IOException e) {
+			System.out.println("Player not found.");
+			return 99;
+		}
 	}
 	
 	public int receiveData(int data) {
-		
+		try {
+			data=this.inFromPlayer.readInt();
+			return data;
+		}catch(IOException e) {
+			System.out.println("Couldn't receive data from player.");
+			return 99;
+		}
+	}
+	
+	public void closeConnection() {
+		try {
+			this.socket.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean isWorking() {
+		return socket.isConnected();
 	}
 }
