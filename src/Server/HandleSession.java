@@ -7,18 +7,18 @@ import java.net.Socket;
  */
 
 public class HandleSession {
-	private Game checkers;
-	private Player player1;
-	private Player player2;
+	private ServerGame checkers;
+	private ServerPlayer player1;
+	private ServerPlayer player2;
 	
 	private boolean continueToPlay = true;
 	
 	//Construct thread
 	public HandleSession(Socket p1, Socket p2){
-		player1 = new Player(Checkers.PLAYER_ONE.getValue(), p1);
-		player2 = new Player(Checkers.PLAYER_TWO.getValue(), p2);
+		player1 = new ServerPlayer(Checkers.PLAYER_ONE.getValue(), p1);
+		player2 = new ServerPlayer(Checkers.PLAYER_TWO.getValue(), p2);
 		
-		checkers = new Game();
+		checkers = new ServerGame();
 	}
 	
 	public void run() {		
@@ -80,10 +80,10 @@ public class HandleSession {
 		}catch(Exception ex){
 			System.out.println("Connection is being closed");
 			
-			if(player1.isOnline())
+			if(player1.isWorking())
 				player1.closeConnection();
 			
-			if(player2.isOnline())
+			if(player2.isWorking())
 				player2.closeConnection();
 			
 			return;
@@ -97,8 +97,8 @@ public class HandleSession {
 	}
 	
 	private void updateGameModel(int from, int to){
-		Tile fromTile = checkers.getTile(from);
-		Tile toTile = checkers.getTile(to);
+		Tile fromTile = checkers.getSquare(from);
+		Tile toTile = checkers.getSquare(to);
 		toTile.setPlayerID(fromTile.getPlayerID());
 		fromTile.setPlayerID(Checkers.EMPTY_TILE.getValue());
 		
@@ -110,7 +110,7 @@ public class HandleSession {
 			int middleRow = (from.getTileRow() + to.getTileRow())/2;
 			int middleCol = (from.getTileColumn() + to.getTileColumn())/2;
 			
-			Tile middleSquare = checkers.getTile((middleRow*8)+middleCol+1);
+			Tile middleSquare = checkers.getSquare((middleRow*8)+middleCol+1);
 			middleSquare.setPlayerID(Checkers.EMPTY_TILE.getValue());
 		}
 	}
