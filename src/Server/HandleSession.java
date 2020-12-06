@@ -6,7 +6,7 @@ import java.net.Socket;
  * TEST HANDLE SESSION TO TEST CLIENT 
  */
 
-public class HandleSession {
+public class HandleSession implements Runnable{
 	private ServerGame checkers;
 	private ServerPlayer player1;
 	private ServerPlayer player2;
