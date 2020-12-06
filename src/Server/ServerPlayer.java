@@ -34,7 +34,8 @@ public class ServerPlayer {
 		}
 	}
 	
-	public int receiveData(int data) {
+	public int receiveData() {
+		int data=0;
 		try {
 			data=this.inFromPlayer.readInt();
 			return data;
