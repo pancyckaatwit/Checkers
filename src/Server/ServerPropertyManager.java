@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import Client.PropertyManager;
-
 public class ServerPropertyManager {
 	private static ServerPropertyManager INSTANCE = null;
 	private Properties prop;
