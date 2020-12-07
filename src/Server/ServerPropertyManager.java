@@ -5,15 +5,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/*
- * TEST PROPERTY MANAGER TO TEST CLIENT
- */
+import Client.PropertyManager;
 
-public class PropertyManager {
-	private static PropertyManager INSTANCE = null;
+public class ServerPropertyManager {
+	private static ServerPropertyManager INSTANCE = null;
 	private Properties prop;
 	
-	private PropertyManager() throws IOException{
+	private ServerPropertyManager() throws IOException{
 		prop = new Properties();
 		InputStream is = getClass().getClassLoader().getResourceAsStream("config.properties");
 		
@@ -24,9 +22,9 @@ public class PropertyManager {
 		}
 	}
 	
-	public static PropertyManager getInstance() throws IOException{
+	public static ServerPropertyManager getInstance() throws IOException{
 		if(INSTANCE == null){
-			INSTANCE = new PropertyManager();
+			INSTANCE = new ServerPropertyManager();
 		}
 		return INSTANCE;
 	}

@@ -46,7 +46,7 @@ private static final long serialVersionUID = 1L;
 		
 		try{
 			
-			PropertyManager pm = PropertyManager.getInstance();
+			ServerPropertyManager pm = ServerPropertyManager.getInstance();
 			int port = pm.getPort();
 			
 			//Create a server socket
