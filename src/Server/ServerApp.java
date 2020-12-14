@@ -13,10 +13,6 @@ import javax.swing.JTextArea;
 
 import com.sun.org.apache.xerces.internal.impl.PropertyManager;
 
-/*
- * TEST SERVER APP TO TEST CLIENT
- */
-
 public class ServerApp extends JFrame{
 private static final long serialVersionUID = 1L;
 	
@@ -27,7 +23,7 @@ private static final long serialVersionUID = 1L;
 	
 	//Network properties
 	private ServerSocket serverSocket;
-	int sessionNo;
+	int sessionNumber;
 	
 	public ServerApp(){
 		BorderLayout layout = new BorderLayout();
@@ -53,11 +49,11 @@ private static final long serialVersionUID = 1L;
 			serverSocket = new ServerSocket(port);
 			information.append(serverSocket.getInetAddress().getHostAddress());
 			information.append(new Date() + ":- Server start at port "+ port + " \n");
-			sessionNo = 1;			
+			sessionNumber = 1;			
 			
 			while(true){
 				
-				information.append(new Date()+ ":- Session "+ sessionNo + " is started\n");
+				information.append(new Date()+ ":- Session "+ sessionNumber + " is started\n");
 				
 				//Wait for player 1
 				Socket player1 = serverSocket.accept();
@@ -75,15 +71,14 @@ private static final long serialVersionUID = 1L;
 				//Notification to player2 that's he's connected successfully
 				new DataOutputStream(player2.getOutputStream()).writeInt(Checkers.PLAYER_TWO.getValue());
 				
-				//Increase Session number
-				sessionNo++;
+				//Increases Session number
+				sessionNumber++;
 				
-				// Create a new thread for this session of two players
+				// Creates a new thread for this session of two players
 				HandleSession task = new HandleSession(player1, player2);
 				new Thread(task).start();
 			}
 		}catch(Exception ex){			
-			ex.printStackTrace();
 			System.exit(0);
 		}				
 	}

@@ -97,8 +97,8 @@ public class HandleSession implements Runnable {
 	}
 	
 	private void updateGameModel(int from, int to){
-		Tile fromTile = checkers.getSquare(from);
-		Tile toTile = checkers.getSquare(to);
+		Tile fromTile = checkers.getTile(from);
+		Tile toTile = checkers.getTile(to);
 		toTile.setPlayerID(fromTile.getPlayerID());
 		fromTile.setPlayerID(Checkers.EMPTY_TILE.getValue());
 		
@@ -110,7 +110,7 @@ public class HandleSession implements Runnable {
 			int middleRow = (from.getTileRow() + to.getTileRow())/2;
 			int middleCol = (from.getTileColumn() + to.getTileColumn())/2;
 			
-			Tile middleSquare = checkers.getSquare((middleRow*8)+middleCol+1);
+			Tile middleSquare = checkers.getTile((middleRow*8)+middleCol+1);
 			middleSquare.setPlayerID(Checkers.EMPTY_TILE.getValue());
 		}
 	}

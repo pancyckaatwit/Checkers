@@ -20,7 +20,7 @@ public class ServerPlayer {
 			inFromPlayer = new DataInputStream(socket.getInputStream());
 			outFromPlayer = new DataOutputStream(socket.getOutputStream());
 		}catch(IOException e) {
-			
+			e.printStackTrace();
 		}
 	}
 	

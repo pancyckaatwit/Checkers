@@ -56,11 +56,11 @@ public class ServerGame {
 		return this.tiles;
 	}
 	
-	public int getTotlaSquares(){
+	public int getTotleTiles(){
 		return tiles.length;
 	}
 	
-	public void printSquareDetails(){
+	public void printTileDetails(){
 		for(int i=0;i<Checkers.NUM_ROWS.getValue();i++){
 			for(int j=0;j<Checkers.NUM_COLS.getValue();j++){
 				System.out.println(tiles[i][j].getTileID() + "--" + tiles[i][j].getTileRow() + "--" + tiles[i][j].getTileColumn() + tiles[i][j].getPlayerID());
@@ -68,7 +68,7 @@ public class ServerGame {
 		}
 	}
 
-	public Tile getSquare(int from) {
+	public Tile getTile(int from) {
 		for(Tile[] sRows:tiles){
 			for(Tile s: sRows){
 				if(s.getTileID()==from){

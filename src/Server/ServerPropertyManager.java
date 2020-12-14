@@ -7,27 +7,25 @@ import java.util.Properties;
 
 public class ServerPropertyManager {
 	private static ServerPropertyManager INSTANCE = null;
-	private Properties prop;
+	private Properties property;
 	
-	private ServerPropertyManager() throws IOException{
-		prop = new Properties();
+	private ServerPropertyManager() throws IOException {
+		property = new Properties();
 		InputStream is = getClass().getClassLoader().getResourceAsStream("Port.properties");
 		
 		if(is != null){
-			prop.load(is);
-		}else{
-			throw new FileNotFoundException("Property file is not found");
+			property.load(is);
 		}
 	}
 	
-	public static ServerPropertyManager getInstance() throws IOException{
+	public static ServerPropertyManager getInstance() throws IOException {
 		if(INSTANCE == null){
 			INSTANCE = new ServerPropertyManager();
 		}
 		return INSTANCE;
 	}
 	
-	public int getPort(){
-		return Integer.parseInt(prop.getProperty("port"));
+	public int getPort() {
+		return Integer.parseInt(property.getProperty("port"));
 	}
 }
