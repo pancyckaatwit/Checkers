@@ -2,18 +2,14 @@ package Server;
 
 import java.net.Socket;
 
-/*
- * TEST HANDLE SESSION TO TEST CLIENT 
- */
-
-public class HandleSession implements Runnable{
+public class HandleSession implements Runnable {
 	private ServerGame checkers;
 	private ServerPlayer player1;
 	private ServerPlayer player2;
 	
-	private boolean continueToPlay = true;
+	private boolean continueToPlay=true;
 	
-	//Construct thread
+	//Construction thread
 	public HandleSession(Socket p1, Socket p2){
 		player1 = new ServerPlayer(Checkers.PLAYER_ONE.getValue(), p1);
 		player2 = new ServerPlayer(Checkers.PLAYER_TWO.getValue(), p2);
@@ -23,9 +19,9 @@ public class HandleSession implements Runnable{
 	
 	public void run() {		
 		
-		//Send Data back and forth		
+		//Sends Data back and forth		
 		try{
-				//notify Player 1 to start
+				//notifies Player 1 to start
 				player1.sendData(1);				
 				
 				while(continueToPlay){
@@ -35,14 +31,16 @@ public class HandleSession implements Runnable{
 					checkStatus(from, to);
 					updateGameModel(from, to);
 							
-					//Send Data back to 2nd Player
-					if(checkers.isOver())
-						player2.sendData(Checkers.YOU_LOSE.getValue());		//Game Over notification
+					//Send the Data back to 2nd Player
+					if(checkers.isOver()) {
+						//Game Over notification
+						player2.sendData(Checkers.YOU_LOSE.getValue());
+					}
 					int fromStatus = player2.sendData(from);
 					int toStatus = player2.sendData(to);
 					checkStatus(fromStatus,toStatus);
 					
-					//IF game is over, break
+					//If game is over, break
 					if(checkers.isOver()){
 						player1.sendData(Checkers.YOU_WIN.getValue());
 						continueToPlay=false;
@@ -51,21 +49,22 @@ public class HandleSession implements Runnable{
 					
 					System.out.println("after break");
 					
-					//wait for player 2's Action
+					//Now waits for the 2nd players action
 					from = player2.receiveData();
 					to = player2.receiveData();
 					checkStatus(from, to);
 					updateGameModel(from, to);					
 					
 					//Send Data back to 1st Player
-					if(checkers.isOver()){
-						player1.sendData(Checkers.YOU_LOSE.getValue());		//Game Over notification
+					if(checkers.isOver()) {
+						//Game Over notification
+						player1.sendData(Checkers.YOU_LOSE.getValue());
 					}					
 					fromStatus = player1.sendData(from);
 					toStatus = player1.sendData(to);
 					checkStatus(fromStatus,toStatus);
 					
-					//IF game is over, break
+					//If the game is over, it breaks
 					if(checkers.isOver()){
 						player2.sendData(Checkers.YOU_WIN.getValue());
 						continueToPlay=false;
@@ -80,12 +79,13 @@ public class HandleSession implements Runnable{
 		}catch(Exception ex){
 			System.out.println("Connection is being closed");
 			
-			if(player1.isWorking())
+			if(player1.isWorking()) {
 				player1.closeConnection();
+			}
 			
-			if(player2.isWorking())
+			if(player2.isWorking()) {
 				player2.closeConnection();
-			
+			}
 			return;
 		}
 	}
