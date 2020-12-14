@@ -13,7 +13,8 @@ import javax.swing.JTextArea;
 
 import com.sun.org.apache.xerces.internal.impl.PropertyManager;
 
-public class ServerApp extends JFrame{
+public class ServerApp extends JFrame {
+	
 private static final long serialVersionUID = 1L;
 	
 	//Frame components
@@ -25,7 +26,7 @@ private static final long serialVersionUID = 1L;
 	private ServerSocket serverSocket;
 	int sessionNumber;
 	
-	public ServerApp(){
+	public ServerApp() {
 		BorderLayout layout = new BorderLayout();
 		setLayout(layout);
 		
@@ -38,9 +39,9 @@ private static final long serialVersionUID = 1L;
 	}	
 	
 	//Establish connection and wait for Clients
-	public void startRunning(){
+	public void startRunning() {
 		
-		try{
+		try {
 			
 			ServerPropertyManager pm = ServerPropertyManager.getInstance();
 			int port = pm.getPort();
@@ -78,7 +79,7 @@ private static final long serialVersionUID = 1L;
 				HandleSession task = new HandleSession(player1, player2);
 				new Thread(task).start();
 			}
-		}catch(Exception ex){			
+		}catch(Exception ex) {			
 			System.exit(0);
 		}				
 	}
