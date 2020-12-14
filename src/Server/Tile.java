@@ -24,7 +24,9 @@ class Tile {
 			this.playerID = Checkers.EMPTY_TILE.getValue();
 		}
 	}
-	
+	/*
+	 * Constructors
+	 */
 	public int getTileRow() {
 		return this.tileRow;
 	}
