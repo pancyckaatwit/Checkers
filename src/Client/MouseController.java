@@ -7,11 +7,11 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
 
-import Client.Square;
+import Client.Tile;
 
 	public class MouseController extends MouseAdapter{
 		
-		private SquarePanel squarePanel;
+		private TilePanel tilePanel;
 		private Controller controller;
 		
 		public void setController(Controller c){
@@ -43,20 +43,20 @@ import Client.Square;
 		
 		private void highlightSelectPiece(MouseEvent e){
 			try{
-				squarePanel = (SquarePanel) e.getSource();
-				Square square = squarePanel.getSquare();
+				tilePanel = (TilePanel) e.getSource();
+				Tile tile = TilePanel.getTile();
 				
 				//if square is already selected - deselect
-				if(square.isSelected()){
+				if(tile.isSelected()){
 					
-					System.out.println("deselect - "+square.getSquareID());
+					System.out.println("deselect - "+tile.getTileID());
 					controller.tileDeselected();				
 				}
 				//else select
 				else{
 					
-					System.out.println("select - "+square.getSquareID());
-					controller.tileSelected(square);
+					System.out.println("select - "+Tile.getTileID());
+					controller.tileSelected(tile);
 				}
 			}catch(Exception ex){
 				

@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import Client.MouseController;
 
 import Client.Board;
-import Client.Square;
-import Client.SquarePanel;
+import Client.Tile;
+import Client.TilePanel;
 
 public class BoardPanel extends JPanel {
 
@@ -20,17 +20,17 @@ public class BoardPanel extends JPanel {
 	private Dimension panelSize = new Dimension(720,720);
 	private Board boardModel;
 	private MouseController listener;
-	private LinkedList<SquarePanel> panels;
-	private Square[][] squares;
+	private LinkedList<TilePanel> panels;
+	private Tile[][] tiles;
 
 	public BoardPanel(MouseController listener){
 		setPreferredSize(panelSize);
 		setLayout(new GridLayout(8,8));
 		
 		boardModel = new Board();
-		squares = boardModel.getSquares();
+		tiles = boardModel.getTiles();
 		this.listener = listener;		
-		panels = new LinkedList<SquarePanel>();		
+		panels=new LinkedList<TilePanel>();		
 		
 		initializeSquarePanels();
 		
@@ -40,30 +40,30 @@ public class BoardPanel extends JPanel {
 	private void initializeSquarePanels() {
 		for(int i=0;i<8;i++){
 			for(int k=0;k<8;k++){
-				SquarePanel sPanel = new SquarePanel(squares[i][k]);
-				if(sPanel.getSquare().isPossibleToMove() || sPanel.getSquare().getPlayerID()==SessionVariable.myID.getValue()){
-					sPanel.addMouseListener(listener);
+				TilePanel tPanel = new TilePanel(tiles[i][k]);
+				if(tPanel.getTile().isPossibleToMove() || tPanel.getTile().getPlayerID()==SessionVariable.myID.getValue()){
+					tPanel.addMouseListener(listener);
 				}
-				panels.add(sPanel);
-				add(sPanel);				
+				panels.add(tPanel);
+				add(tPanel);				
 			}			
 		}
 	}
 	
 	public void repaintPanels(){
-		for(SquarePanel panel : panels){
-			panel.setListner(listener);	
+		for(TilePanel panel : panels){
+			panel.setListener(listener);	
 		}
 		
 		repaint();
 	}
 
 	
-	public LinkedList<Square> getPlayableSquares(Square s){
-		return boardModel.findPlayableSquares(s);		
+	public LinkedList<Tile> getPlayableSquares(Tile t){
+		return boardModel.findPlayableSquares(t);		
 	}
 	
-	public Square getSquare(int ID){
-		return panels.get(ID-1).getSquare();
+	public Tile getTile(int ID){
+		return panels.get(ID-1).getTile();
 	}
 }

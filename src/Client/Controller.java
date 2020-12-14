@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 import Client.Checkers;
 import Client.Player;
-import Client.Square;
+import Client.Tile;
 
 	public class Controller implements Runnable {
 		private boolean continueToPlay;
@@ -26,8 +26,8 @@ import Client.Square;
 		private Player player;
 		
 		//Data
-		private LinkedList<Square> selectedSquares;
-		private LinkedList<Square> validTiles;
+		private LinkedList<Tile> selectedTiles;
+		private LinkedList<Tile> validTiles;
 		//private LinkedList<Square> crossableSquares;
 		
 		public Controller(Player player, DataInputStream input, DataOutputStream output){
@@ -35,8 +35,8 @@ import Client.Square;
 			this.fromServer = input;
 			this.toServer= output;
 			
-			selectedSquares = new LinkedList<Square>();
-			validTiles = new LinkedList<Square>();
+			selectedTiles = new LinkedList<Tile>();
+			validTiles = new LinkedList<Tile>();
 		}
 		
 		public void setBoardPanel(BoardPanel panel)
@@ -121,10 +121,10 @@ import Client.Square;
 				}
 		}	
 
-		private void sendMove(Square from, Square to) throws IOException
+		private void sendMove(Tile from, Tile to) throws IOException
 			{
-			toServer.writeInt(from.getSquareID());
-			toServer.writeInt(to.getSquareID());
+			toServer.writeInt(from.getTileID());
+			toServer.writeInt(to.getTileID());
 			}
 
 		private void waitForPlayerAction() throws InterruptedException
@@ -136,7 +136,7 @@ import Client.Square;
 			waitingForAction = true;		
 		}
 		
-		public void move(Square from, Square to){
+		public void move(Tile from, Tile to){
 			to.setPlayerID(from.getPlayerID());
 			from.setPlayerID(Checkers.EMPTY_TILE.getValue());
 			checkCrossJump(from, to);
@@ -155,41 +155,41 @@ import Client.Square;
 		}
 		
 		//When a square is selected
-		public void tileSelected(Square s)
+		public void tileSelected(Tile t)
 		{
 			
-			if(selectedSquares.isEmpty())
+			if(selectedTiles.isEmpty())
 				{
-				addSelectedTile(s);
+				addSelectedTile(t);
 				}		
 			//if one is already selected, check if it is possible move
-			else if(selectedSquares.size()>=1){
-				if(validTiles.contains(s)){
-					move(selectedSquares.getFirst(),s);
+			else if(selectedTiles.size()>=1){
+				if(validTiles.contains(t)){
+					move(selectedTiles.getFirst(),t);
 				}else{
 					tileDeselected();
-					addSelectedTile(s);
+					addSelectedTile(t);
 				}
 			}
 		}
 		
-		private void addSelectedTile(Square s){
-			s.setSelected(true);
-			selectedSquares.add(s);
-			getPlayableSquares(s);
+		private void addSelectedTile(Tile t){
+			t.setSelected(true);
+			selectedTiles.add(t);
+			getPlayableTiles(t);
 			
 			
 		}
 
 		public void tileDeselected() {
 			
-			for(Square square:selectedSquares)
-				square.setSelected(false);
+			for(Tile tile:selectedTiles)
+				tile.setSelected(false);
 			
-			selectedSquares.clear();
+			selectedTiles.clear();
 			
-			for(Square square:validTiles){
-				square.setPossibleToMove(false);
+			for(Tile tile:validTiles){
+				tile.setPossibleToMove(false);
 			}
 			
 			validTiles.clear();
@@ -197,14 +197,14 @@ import Client.Square;
 		}
 		
 		
-		private void getPlayableSquares(Square s)
+		private void getPlayableTiles(Tile t)
 		{
 			validTiles.clear();		
-			validTiles = boardPanel.getPlayableSquares(s);
+			validTiles = boardPanel.getPlayableSquares(t);
 			
-			for(Square square:validTiles){
+			for(Tile tile:validTiles){
 				
-				System.out.println(square.getSquareID());
+				System.out.println(tile.getTileID());
 			}		
 			
 			boardPanel.repaintPanels();
@@ -216,31 +216,29 @@ import Client.Square;
 			return player.isMyTurn();
 			}
 		
-		private void checkCrossJump(Square from, Square to){		
+		private void checkCrossJump(Tile from, Tile to){		
 			
-			if(Math.abs(from.getSquareRow()-to.getSquareRow())==2)
+			if(Math.abs(from.getTileRow()-to.getTileRow())==2)
 				{		
 				
-				int middleRow = (from.getSquareRow() + to.getSquareRow())/2;
-				int middleCol = (from.getSquareCol() + to.getSquareCol())/2;
+				int middleRow = (from.getTileRow() + to.getTileRow())/2;
+				int middleColumn = (from.getTileColumn() + to.getTileColumn())/2;
 				
-				Square middleSquare = boardPanel.getSquare((middleRow*8)+middleCol+1);
+				Tile middleTile = boardPanel.getTile((middleRow*8)+middleColumn+1);
 				
-				middleSquare.setPlayerID(Checkers.EMPTY_TILE.getValue());
-				middleSquare.removeKing();
+				middleTile.setPlayerID(Checkers.EMPTY_TILE.getValue());
 				}
 		}
 	
 		
-		private void updateReceivedInfo(int from, int to)
-			{
-			Square fromSquare = boardPanel.getSquare(from);
-			Square toSquare = boardPanel.getSquare(to);
+		private void updateReceivedInfo(int from, int to) {
+			Tile fromTile = boardPanel.getTile(from);
+			Tile toTile = boardPanel.getTile(to);
 			
-			toSquare.setPlayerID(fromSquare.getPlayerID());
-			fromSquare.setPlayerID(Checkers.EMPTY_TILE.getValue());
+			toTile.setPlayerID(fromTile.getPlayerID());
+			fromTile.setPlayerID(Checkers.EMPTY_TILE.getValue());
 			
-			checkCrossJump(fromSquare, toSquare);
+			checkCrossJump(fromTile, toTile);
 			
 			boardPanel.repaintPanels();
 		}

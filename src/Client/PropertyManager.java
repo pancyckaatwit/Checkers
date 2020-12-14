@@ -12,7 +12,7 @@ public class PropertyManager {
 		
 		private PropertyManager() throws IOException{
 			prop = new Properties();
-			InputStream is = getClass().getClassLoader().getResourceAsStream("config.properties");
+			InputStream is = getClass().getClassLoader().getResourceAsStream("clientPort.properties");
 			
 			if(is != null){
 				prop.load(is);
