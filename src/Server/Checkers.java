@@ -15,7 +15,6 @@ public enum Checkers {
 	YOU_LOSE(91),
 	DOUBLE_JUMP(92);
 	
-	
 	private int value;
 	
 	public int getValue() {
