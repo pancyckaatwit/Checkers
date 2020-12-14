@@ -1,7 +1,7 @@
 package Server;
 
 /*
- * Class for an individual spot on the overall board
+ * Class for an individual square on the overall board
  */
 
 class Tile {
@@ -21,9 +21,16 @@ class Tile {
 		this.setOccupied(isOccupied);
 		
 		if(this.isOccupied){
-			//EMPTY_TILE will be in Checkers class not yet made
 			this.playerID = Checkers.EMPTY_TILE.getValue();
 		}
+	}
+	
+	public int getTileRow() {
+		return this.tileRow;
+	}
+
+	public int getTileColumn() {
+		return this.tileColumn;
 	}
 	
 	public boolean getIsOccupied() {
@@ -44,14 +51,6 @@ class Tile {
 	
 	public int getTileID() {
 		return this.tileID;
-	}
-	
-	public int getTileRow() {
-		return this.tileRow;
-	}
-	
-	public int getTileColumn() {
-		return this.tileColumn;
 	}
 	
 }
