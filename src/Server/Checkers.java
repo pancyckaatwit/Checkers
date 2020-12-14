@@ -18,13 +18,13 @@ public enum Checkers {
 	
 	private int value;
 	
+	public int getValue() {
+		return this.value;
+	}
+	
 	//Constructor
 	private Checkers(int value) {
 		this.value=value;
-	}
-	
-	public int getValue() {
-		return this.value;
 	}
 	
 }

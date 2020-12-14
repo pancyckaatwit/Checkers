@@ -11,7 +11,7 @@ public class ServerPropertyManager {
 	
 	private ServerPropertyManager() throws IOException{
 		prop = new Properties();
-		InputStream is = getClass().getClassLoader().getResourceAsStream("config.properties");
+		InputStream is = getClass().getClassLoader().getResourceAsStream("Port.properties");
 		
 		if(is != null){
 			prop.load(is);
