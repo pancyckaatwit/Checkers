@@ -1,7 +1,7 @@
 package Server;
 
 public enum Checkers {
-
+	
 	//Variables for Checkers game
 	NUM_ROWS(8),
 	NUM_COLS(8),
