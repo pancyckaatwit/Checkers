@@ -24,6 +24,7 @@ class Tile {
 			this.playerID = Checkers.EMPTY_TILE.getValue();
 		}
 	}
+	
 	/*
 	 * Constructors
 	 */
