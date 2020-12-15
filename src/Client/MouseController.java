@@ -44,18 +44,16 @@ import Client.Tile;
 		private void highlightSelectPiece(MouseEvent e){
 			try{
 				tilePanel = (TilePanel) e.getSource();
-				Tile tile = TilePanel.getTile();
+				Tile tile = tilePanel.getTile();
 				
 				//if square is already selected - deselect
 				if(tile.isSelected()){
 					
 					System.out.println("deselect - "+tile.getTileID());
 					controller.tileDeselected();				
-				}
-				//else select
-				else{
+				}else {
 					
-					System.out.println("select - "+Tile.getTileID());
+					System.out.println("select - "+tile.getTileID());
 					controller.tileSelected(tile);
 				}
 			}catch(Exception ex){

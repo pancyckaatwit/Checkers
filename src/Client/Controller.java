@@ -200,7 +200,7 @@ import Client.Tile;
 		private void getPlayableTiles(Tile t)
 		{
 			validTiles.clear();		
-			validTiles = boardPanel.getPlayableSquares(t);
+			validTiles = boardPanel.getPlayableTiles(t);
 			
 			for(Tile tile:validTiles){
 				

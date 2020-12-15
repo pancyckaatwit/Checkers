@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
@@ -66,7 +67,7 @@ public class TilePanel {
 			}
 		}
 		
-		public void setListener(){
+		public void setListener() {
 			if(tile.isPossibleToMove() || tile.getPlayerID()==SessionVariable.myID.getValue()){
 				this.removeMouseListener(handler);
 				this.addMouseListener(handler);
@@ -75,7 +76,7 @@ public class TilePanel {
 			}
 		}
 		
-		public void setListner(MyMouseListener MyListner){
+		public void setListener(MouseController MyListner){
 			setListener();
 			if(tile.isPossibleToMove() || tile.getPlayerID()==SessionVariable.myID.getValue()){
 				this.removeMouseListener(MyListner);
@@ -85,7 +86,7 @@ public class TilePanel {
 			}
 		}
 		
-		//return Square
+		//return Tile
 		public Tile getTile(){
 			return this.tile;
 		}
@@ -119,25 +120,21 @@ public class TilePanel {
 			public void mouseEntered(MouseEvent e){	
 				super.mouseEntered(e);
 				focused = true;
-				repaint();
 			}
 			
 			public void mouseExited(MouseEvent e){
 				super.mouseExited(e);
 				focused = false;
-				repaint();
 			}
 			
 			public void mousePressed(MouseEvent e) {
 				if(isClicked()){
 					System.out.println("deselect - "+tile.getTileID());
 					resetClicked();
-					repaint();
 				}
 				else if(tile.getPlayerID()==SessionVariable.myID.getValue()){
 					System.out.println("select - "+tile.getTileID());
-					setClicked();
-					repaint();		
+					setClicked();	
 				}
 			}
 		}

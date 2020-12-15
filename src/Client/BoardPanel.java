@@ -23,7 +23,7 @@ public class BoardPanel extends JPanel {
 	private LinkedList<TilePanel> panels;
 	private Tile[][] tiles;
 
-	public BoardPanel(MouseController listener){
+	public BoardPanel(MouseController listener) {
 		setPreferredSize(panelSize);
 		setLayout(new GridLayout(8,8));
 		
@@ -32,17 +32,17 @@ public class BoardPanel extends JPanel {
 		this.listener = listener;		
 		panels=new LinkedList<TilePanel>();		
 		
-		initializeSquarePanels();
+		initializeTilePanels();
 		
-		System.out.println(boardModel.getTotlaSquares());		
+		System.out.println(boardModel.getTotalTiles());		
 	}
 	
-	private void initializeSquarePanels() {
+	private void initializeTilePanels() {
 		for(int i=0;i<8;i++){
 			for(int k=0;k<8;k++){
 				TilePanel tPanel = new TilePanel(tiles[i][k]);
 				if(tPanel.getTile().isPossibleToMove() || tPanel.getTile().getPlayerID()==SessionVariable.myID.getValue()){
-					tPanel.addMouseListener(listener);
+					tPanel.addMouseController(listener);
 				}
 				panels.add(tPanel);
 				add(tPanel);				
@@ -59,8 +59,8 @@ public class BoardPanel extends JPanel {
 	}
 
 	
-	public LinkedList<Tile> getPlayableSquares(Tile t){
-		return boardModel.findPlayableSquares(t);		
+	public LinkedList<Tile> getPlayableTiles(Tile t){
+		return boardModel.findPlayableTiles(t);		
 	}
 	
 	public Tile getTile(int ID){

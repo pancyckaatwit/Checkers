@@ -12,11 +12,11 @@ private Tile[][] tiles;
 	
 	public Board(){
 		tiles = new Tile[8][8];
-		setSquares();
+		setTiles();
 		assignPlayerIDs();
 	}
 	
-	private void setSquares() {
+	private void setTiles() {
 		boolean rowInitialFilled, isFilled;
 		int count = 0;
 		
@@ -38,11 +38,11 @@ private Tile[][] tiles;
 		return this.tiles;
 	}
 	
-	public int getTotlaSquares() {
+	public int getTotalTiles() {
 		return tiles.length;
 	}
 	
-	public void printSquareDetails() {
+	public void printTileDetails() {
 		for(int r=0;r<Checkers.NUM_ROWS.getValue();r++) {
 			for(int c=0;c<Checkers.NUM_COLS.getValue();c++) {
 				System.out.println(tiles[r][c].getTileID() + " --"+ tiles[r][c].isPossibleToMove());
@@ -73,7 +73,7 @@ private Tile[][] tiles;
 		}
 	}
 	
-	public LinkedList<Tile> findPlayableSquares(Tile selectedTile) {
+	public LinkedList<Tile> findPlayableTiles(Tile selectedTile) {
 		
 		LinkedList<Tile> playableSquares = new LinkedList<Tile>();
 		
@@ -83,13 +83,13 @@ private Tile[][] tiles;
 		int movableRow = (selectedTile.getPlayerID()==1) ? selectedRow+1 : selectedRow-1;
 		
 		//check two front squares
-		twoFrontSquares(playableSquares, movableRow, selectedCol);
+		twoFrontTiles(playableSquares, movableRow, selectedCol);
 		crossJumpFront(playableSquares, (selectedTile.getPlayerID()==1) ? movableRow+1 : movableRow-1, selectedCol, movableRow);
 		return playableSquares;		
 	}
 	
 	//check two front squares
-	private void twoFrontSquares(LinkedList<Tile> pack, int movableRow, int selectedColumn) {
+	private void twoFrontTiles(LinkedList<Tile> pack, int movableRow, int selectedColumn) {
 		
 		if(movableRow>=0 && movableRow<8) {
 			//right Corner
@@ -113,15 +113,15 @@ private Tile[][] tiles;
 	}
 	
 	//cross jump - two front
-	private void crossJumpFront(LinkedList<Tile> pack, int movableRow, int selectedCol, int middleRow){
+	private void crossJumpFront(LinkedList<Tile> pack, int movableRow, int selectedColumn, int middleRow){
 		
 		int middleColumn;
 		
 		if(movableRow>=0 && movableRow<8) {
 			//right upper Corner
-			if(selectedCol>=0 && selectedCol<6){
-				Tile rightCorner = tiles[movableRow][selectedCol+2];				
-				middleColumn = (selectedCol+selectedCol+2)/2;				
+			if(selectedColumn>=0 && selectedColumn<6){
+				Tile rightCorner = tiles[movableRow][selectedColumn+2];				
+				middleColumn = (selectedColumn+selectedColumn+2)/2;				
 				if(rightCorner.getPlayerID()==0 && isOpponentInbetween(middleRow, middleColumn)){
 					rightCorner.setPossibleToMove(true);
 					pack.add(rightCorner);
@@ -129,9 +129,9 @@ private Tile[][] tiles;
 			}
 			
 			//left upper corner
-			if(selectedCol>1 && selectedCol <=7) {
-				Tile leftCorner = tiles[movableRow][selectedCol-2];
-				middleColumn = (selectedCol+selectedCol-2)/2;
+			if(selectedColumn>1 && selectedColumn <=7) {
+				Tile leftCorner = tiles[movableRow][selectedColumn-2];
+				middleColumn = (selectedColumn+selectedColumn-2)/2;
 				if(leftCorner.getPlayerID()==0 && isOpponentInbetween(middleRow, middleColumn)){
 					leftCorner.setPossibleToMove(true);
 					pack.add(leftCorner);
@@ -140,7 +140,7 @@ private Tile[][] tiles;
 		}
 	}
 	
-	private boolean isOpponentInbetween(int row, int col) {
-		return tiles[row][col].isOpponentTile();
+	private boolean isOpponentInbetween(int row, int column) {
+		return tiles[row][column].isOpponentTile();
 	}
 }
