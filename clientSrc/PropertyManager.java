@@ -13,18 +13,12 @@ public class PropertyManager {
 		{
 		
 		prop = new Properties();
-		InputStream is = getClass().getClassLoader().getResourceAsStream("config.properties");
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("ClientPort.properties");
 		
-		if(is != null)
+		if(inputStream != null)
 			{
 			
-			prop.load(is);
-			
-			}
-		else
-			{
-			
-			throw new FileNotFoundException("Property file is not found");
+			prop.load(inputStream);
 			
 			}
 		}

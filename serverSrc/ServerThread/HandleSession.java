@@ -1,11 +1,10 @@
-package session;
+package ServerThread;
 import javax.swing.*;
 
-
-import constants.Checkers;
-import model.ServerGame;
-import model.ServerPlayer;
-import model.Tile;
+import ClientSetup.Tile;
+import ServerCheckers.Checkers;
+import ServerSetup.ServerGame;
+import ServerSetup.ServerPlayer;
 
 import java.io.*;
 import java.net.*;

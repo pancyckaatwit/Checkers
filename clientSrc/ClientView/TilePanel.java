@@ -1,4 +1,4 @@
-package view;
+package ClientView;
 
 import java.awt.Color;
 
@@ -12,9 +12,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import model.Tile;
-import constant.*;
-import handler.MouseController;
+import ClientCheckers.*;
+import ClientController.MouseController;
+import ClientSetup.Tile;
 
 /**
  * Client Application -> SquarePanel

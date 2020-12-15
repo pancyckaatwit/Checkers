@@ -1,7 +1,7 @@
-package constant;
+package ClientCheckers;
 
 /**
- *
+ * Client Application
  * 
  * Checker Constants
  */

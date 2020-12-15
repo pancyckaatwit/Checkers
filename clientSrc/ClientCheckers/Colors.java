@@ -1,4 +1,4 @@
-package constant;
+package ClientCheckers;
 
 import java.awt.Color;
 

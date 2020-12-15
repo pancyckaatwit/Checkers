@@ -1,4 +1,4 @@
-package view;
+package ClientView;
 import java.awt.Color;
 
 import java.awt.Dimension;
@@ -7,10 +7,11 @@ import java.util.LinkedList;
 
 import javax.sound.midi.ControllerEventListener;
 import javax.swing.*;
-import model.Board;
-import model.Tile;
-import constant.SessionVariable;
-import handler.*;
+
+import ClientCheckers.SessionVariable;
+import ClientController.*;
+import ClientSetup.Board;
+import ClientSetup.Tile;
 
 /**
  * Client Application -> ClientApp

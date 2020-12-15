@@ -1,7 +1,7 @@
-package model;
+package ClientSetup;
 
-import constant.Checkers;
-import constant.SessionVariable;
+import ClientCheckers.Checkers;
+import ClientCheckers.SessionVariable;
 
 /**
  * Client Application -> ClientApp

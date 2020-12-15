@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-import view.BoardPanel;
+import ClientView.BoardPanel;
 
 /**
 

@@ -1,4 +1,4 @@
-package handler;
+package ClientController;
 
 import java.awt.event.MouseAdapter;
 
@@ -8,8 +8,8 @@ import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
-import model.Tile;
-import view.TilePanel;
+import ClientSetup.Tile;
+import ClientView.TilePanel;
 
 public class MouseController extends MouseAdapter{
 	

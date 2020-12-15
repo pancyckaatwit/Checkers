@@ -1,9 +1,10 @@
-package model;
-import constants.*;
+package ServerSetup;
+import ClientSetup.Tile;
+import ServerCheckers.*;
 
 /**
  * Server Application -> Game
- *@author Alex Pancycka
+ *@author Alex Pancyck
  * 
  * Game Model
  */

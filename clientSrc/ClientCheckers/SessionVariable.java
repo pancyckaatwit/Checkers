@@ -1,6 +1,6 @@
-package constant;
+package ClientCheckers;
 
-import handler.MouseController;
+import ClientController.MouseController;
 
 public enum SessionVariable
 	{

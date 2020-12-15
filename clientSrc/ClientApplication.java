@@ -3,12 +3,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import constant.Checkers;
-import handler.Controller;
-import handler.MouseController;
-import model.Player;
-import model.ServerPlayer;
-import view.BoardPanel;
+import ClientCheckers.Checkers;
+import ClientController.Controller;
+import ClientController.MouseController;
+import ClientSetup.Player;
+import ClientView.BoardPanel;
+import ServerSetup.ServerPlayer;
 
 import java.io.*;
 import java.net.*;

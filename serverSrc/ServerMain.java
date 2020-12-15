@@ -9,9 +9,9 @@ public class ServerMain {
 	public static void main(String[] args) {
 		
 		ServerApp server = new ServerApp();
-		server.setSize(400,250);
+		server.setSize(350, 150);
 		server.setVisible(true);
-		server.setTitle("Checkers Server");
+		server.setTitle("APJG Checkers Server");
 		server.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//start Connection

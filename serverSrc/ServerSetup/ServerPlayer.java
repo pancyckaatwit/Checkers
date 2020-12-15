@@ -1,4 +1,4 @@
-package model;
+package ServerSetup;
 import java.io.DataInputStream;
 
 import java.io.DataOutputStream;

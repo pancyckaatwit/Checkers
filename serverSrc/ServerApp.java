@@ -1,16 +1,16 @@
 import java.awt.BorderLayout;
+
 import javax.swing.*;
 
-import constants.Checkers;
-import session.HandleSession;
+import ServerCheckers.Checkers;
+import ServerThread.HandleSession;
 
 import java.io.*;
 import java.net.*;
-import java.util.Date;
 
 /**
  * Server Application -> ServerApp
- * @author Alex Pancycka
+ * @author Alex Pancyck
  * 
  * This class will establish a Server socket
  * then wait for players to connect. After two players
@@ -23,26 +23,26 @@ public class ServerApp extends JFrame {
 	
 	//Frame components
 	private JScrollPane scroll;
-	private JTextArea information;
+	private JTextArea info;
 	private JLabel title;
 	
 	//Network properties
 	private ServerSocket serverSocket;
-int sessionNumber;
+	int threadNumber;
 	
 	public ServerApp() {
 		BorderLayout layout = new BorderLayout();
 		setLayout(layout);
 		
-		title = new JLabel("Server");
-		information = new JTextArea();
-		scroll = new JScrollPane(information);
+		title = new JLabel("APJG Checkers Server");
+		info = new JTextArea();
+		scroll = new JScrollPane(info);
 		
 		add(title,BorderLayout.NORTH);
 		add(scroll, BorderLayout.CENTER);
 	}	
 	
-	//Establish connection and wait for Clients
+	//Starts a connection with client
 	public void startRunning() {
 		
 		try {
@@ -50,40 +50,39 @@ int sessionNumber;
 			ServerPropertyManager pm = ServerPropertyManager.getInstance();
 			int port = pm.getPort();
 			
-			//Create a server socket
+			//Initializes a socket for the server
 			serverSocket = new ServerSocket(port);
-			information.append(serverSocket.getInetAddress().getHostAddress());
-			information.append(new Date() + ":- Server start at port "+ port + " \n");
-			sessionNumber = 1;			
+			info.append(serverSocket.getInetAddress().getHostAddress());
+			threadNumber=1;			
 			
 			while(true){
 				
-				information.append(new Date()+ ":- Session "+ sessionNumber + " is started\n");
+				info.append( threadNumber + " has started\n");
 				
-				//Wait for player 1
+				//Player 1 
 				Socket player1 = serverSocket.accept();
-				information.append(new Date() + ":- player1 joined at");
-				information.append(player1.getInetAddress().getHostAddress() + "\n");
+				info.append("Player1 has joined");
 				
-				//Notification to player1 that's he's connected successfully
+				//Player 1 connected confirmation
 				new DataOutputStream(player1.getOutputStream()).writeInt(Checkers.PLAYER_ONE.getValue());
 				
-				//Wait for player 2
+				//Player 2
 				Socket player2 = serverSocket.accept();
-				information.append(new Date() + ":- player2 joined at");
-				information.append(player2.getInetAddress().getHostAddress() +"\n");
+				info.append("Player2 has joined");
 				
-				//Notification to player2 that's he's connected successfully
+				
+				//Player 2 connection confirmed
 				new DataOutputStream(player2.getOutputStream()).writeInt(Checkers.PLAYER_TWO.getValue());
 				
-				//Increases Session number
-				sessionNumber++;
+				//Increases Thread number
+				threadNumber++;
 				
 				// Creates a new thread for this session of two players
 				HandleSession task = new HandleSession(player1, player2);
 				new Thread(task).start();
 			}
-		}catch(Exception ex) {			
+		}catch(Exception ex) {	
+			ex.printStackTrace();
 			System.exit(0);
 		}				
 	}

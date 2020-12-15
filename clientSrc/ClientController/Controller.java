@@ -1,4 +1,4 @@
-package handler;
+package ClientController;
 import java.io.DataInputStream;
 
 import java.io.DataOutputStream;
@@ -7,11 +7,11 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
-import constant.Checkers;
-import model.Player;
-import model.ServerPlayer;
-import model.Tile;
-import view.BoardPanel;
+import ClientCheckers.Checkers;
+import ClientSetup.Player;
+import ClientSetup.Tile;
+import ClientView.BoardPanel;
+import ServerSetup.ServerPlayer;
 
 /**
  * Client Application -> Controller

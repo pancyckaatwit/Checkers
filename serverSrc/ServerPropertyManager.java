@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -11,12 +9,10 @@ public class ServerPropertyManager {
 	
 	private ServerPropertyManager() throws IOException{
 		prop = new Properties();
-		InputStream is = getClass().getClassLoader().getResourceAsStream("config.properties");
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("ServerPort.properties");
 		
-		if(is != null){
-			prop.load(is);
-		}else{
-			throw new FileNotFoundException("Property file is not found");
+		if(inputStream != null){
+			prop.load(inputStream);
 		}
 	}
 	

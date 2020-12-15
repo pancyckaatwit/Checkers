@@ -1,8 +1,7 @@
-package model;
+package ClientSetup;
 import java.util.LinkedList;
 
-
-import constant.Checkers;
+import ClientCheckers.Checkers;
 
 /**
  * Client Application -> Board

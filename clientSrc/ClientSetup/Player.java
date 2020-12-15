@@ -1,6 +1,6 @@
-package model;
+package ClientSetup;
 
-import constant.SessionVariable;
+import ClientCheckers.SessionVariable;
 
 /**
  * Client Application -> Player
