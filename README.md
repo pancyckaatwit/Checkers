@@ -20,3 +20,4 @@ All you need to do to install is copy the code into your chosen IDE. For this pr
 <h1> Contributors</h1>
 Alexander Pancyck
 Jake Giguere
+<h1> References</h1>
