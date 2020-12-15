@@ -8,9 +8,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class TilePanel {
+public class TilePanel extends JPanel {
 		private static final long serialVersionUID = 1L;
 
 		private static final int WHEN_FOCUSED = 0;
@@ -107,10 +108,10 @@ public class TilePanel {
 		}
 		
 		
-		private void paint(Graphics2D g2){
-			int padding= 24;
-			g2.fillOval(padding/2, padding/2, getWidth()-padding, getHeight()-padding);			
-		}
+//		private void paint(Graphics2D g2){
+//			int padding= 24;
+//			g2.fillOval(padding/2, padding/2, getWidth()-padding, getHeight()-padding);			
+//		}
 		
 		/**
 		 * Mouse Listener 

@@ -5,9 +5,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.LinkedList;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Client.MouseController;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import Client.Board;
 import Client.Tile;
@@ -42,10 +46,9 @@ public class BoardPanel extends JPanel {
 			for(int k=0;k<8;k++){
 				TilePanel tPanel = new TilePanel(tiles[i][k]);
 				if(tPanel.getTile().isPossibleToMove() || tPanel.getTile().getPlayerID()==SessionVariable.myID.getValue()){
-					tPanel.addMouseController(listener);
+					tPanel.addMouseListener(listener);
 				}
-				panels.add(tPanel);
-				add(tPanel);				
+				panels.add(tPanel);				
 			}			
 		}
 	}
