@@ -2,6 +2,7 @@ package Client;
 
 import java.util.LinkedList;
 import Client.Tile;
+
 /*
  * Class for the board to be played on
  */
@@ -15,44 +16,37 @@ private Tile[][] tiles;
 		setTiles();
 		assignPlayerIDs();
 	}
-	
-	private void setTiles() {
-		boolean rowInitialFilled, isFilled;
-		int count = 0;
-		
-		//Rows
-		for(int r=0;r<Checkers.NUM_ROWS.getValue();r++) {
-			rowInitialFilled = (r%2 == 1) ? true : false;
-			
-			//Columns
-			for(int c=0;c<Checkers.NUM_COLS.getValue();c++) {
-				isFilled = (rowInitialFilled && c%2 == 0) ? true : (!rowInitialFilled && c%2 == 1) ? true : false;
-				count++;
-				
-				tiles[r][c] = new Tile(count, r, c, isFilled);
-			}
-		}		
-	}
-
+	//Constructor
 	public Tile[][] getTiles() {
 		return this.tiles;
 	}
-	
+	//Constructor
 	public int getTotalTiles() {
 		return tiles.length;
 	}
 	
-	public void printTileDetails() {
+	//This class sets the tiles for the board
+	private void setTiles() {
+		boolean rowInitialOccupied, isOccupied;
+		int count = 0;
+		
+		//Rows
 		for(int r=0;r<Checkers.NUM_ROWS.getValue();r++) {
+			rowInitialOccupied = (r%2 == 1) ? true : false;
+			
+			//Columns
 			for(int c=0;c<Checkers.NUM_COLS.getValue();c++) {
-				System.out.println(tiles[r][c].getTileID() + " --"+ tiles[r][c].isPossibleToMove());
+				isOccupied = (rowInitialOccupied && c%2 == 0) ? true : (!rowInitialOccupied && c%2 == 1) ? true : false;
+				count++;
+				
+				tiles[r][c] = new Tile(count, r, c, isOccupied);
 			}
-		}
+		}		
 	}
 	
+	//Assigns each player to a set of rows
 	private void assignPlayerIDs() {
-		
-		//Rows 0-2 for player ONE
+		//Rows 0-2 for Player One
 		for(int r=0;r<3;r++) {					
 			//Columns
 			for(int c=0;c<Checkers.NUM_COLS.getValue();c++) {
@@ -62,7 +56,7 @@ private Tile[][] tiles;
 			}
 		}
 		
-		//Rows 5-7 for player TWO
+		//Rows 5-7 for Player Two
 		for(int r=5;r<8;r++) { 					
 			//Columns
 			for(int c=0;c<Checkers.NUM_COLS.getValue();c++) {
@@ -75,7 +69,7 @@ private Tile[][] tiles;
 	
 	public LinkedList<Tile> findPlayableTiles(Tile selectedTile) {
 		
-		LinkedList<Tile> playableSquares = new LinkedList<Tile>();
+		LinkedList<Tile> playableTiles = new LinkedList<Tile>();
 		
 		int selectedRow = selectedTile.getTileRow();
 		int selectedCol = selectedTile.getTileColumn();
@@ -83,16 +77,15 @@ private Tile[][] tiles;
 		int movableRow = (selectedTile.getPlayerID()==1) ? selectedRow+1 : selectedRow-1;
 		
 		//check two front squares
-		twoFrontTiles(playableSquares, movableRow, selectedCol);
-		crossJumpFront(playableSquares, (selectedTile.getPlayerID()==1) ? movableRow+1 : movableRow-1, selectedCol, movableRow);
-		return playableSquares;		
+		twoFrontTiles(playableTiles, movableRow, selectedCol);
+		crossJumpFront(playableTiles, (selectedTile.getPlayerID()==1) ? movableRow+1 : movableRow-1, selectedCol, movableRow);
+		return playableTiles;		
 	}
 	
-	//check two front squares
+	//Checks the two front tiles to check if they are a viable spot
 	private void twoFrontTiles(LinkedList<Tile> pack, int movableRow, int selectedColumn) {
-		
 		if(movableRow>=0 && movableRow<8) {
-			//right Corner
+			//Right tile
 			if(selectedColumn>=0 && selectedColumn<7) {
 				Tile rightCorner = tiles[movableRow][selectedColumn+1];
 				if(rightCorner.getPlayerID()==0){
@@ -101,7 +94,7 @@ private Tile[][] tiles;
 				}
 			}
 			
-			//left upper corner
+			//Left Tile
 			if(selectedColumn>0 && selectedColumn <=8) {
 				Tile leftCorner = tiles[movableRow][selectedColumn-1];
 				if(leftCorner.getPlayerID()==0){
@@ -114,11 +107,9 @@ private Tile[][] tiles;
 	
 	//cross jump - two front
 	private void crossJumpFront(LinkedList<Tile> pack, int movableRow, int selectedColumn, int middleRow){
-		
 		int middleColumn;
-		
 		if(movableRow>=0 && movableRow<8) {
-			//right upper Corner
+			//Right tile
 			if(selectedColumn>=0 && selectedColumn<6){
 				Tile rightCorner = tiles[movableRow][selectedColumn+2];				
 				middleColumn = (selectedColumn+selectedColumn+2)/2;				
@@ -127,8 +118,7 @@ private Tile[][] tiles;
 					pack.add(rightCorner);
 				}
 			}
-			
-			//left upper corner
+			//Left tile
 			if(selectedColumn>1 && selectedColumn <=7) {
 				Tile leftCorner = tiles[movableRow][selectedColumn-2];
 				middleColumn = (selectedColumn+selectedColumn-2)/2;

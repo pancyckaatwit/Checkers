@@ -40,7 +40,7 @@ public class HandleSession implements Runnable {
 					int toStatus = player2.sendData(to);
 					checkStatus(fromStatus,toStatus);
 					
-					//If game is over, break
+					//If the game is over, break
 					if(checkers.isOver()){
 						player1.sendData(Checkers.YOU_WIN.getValue());
 						continueToPlay=false;

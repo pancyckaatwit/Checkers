@@ -10,7 +10,6 @@ public class Player {
 	
 	public Player(String name){
 		this.name = name;
-		
 		setMyTurn(false);
 	}
 
@@ -22,21 +21,17 @@ public class Player {
 		return playerID;
 	}
 
-
 	public void setPlayerID(int playerID) {
 		this.playerID = playerID;
 		SessionVariable.myID.setValue(playerID);
 	}
 
-
 	public boolean isMyTurn() {
 		return myTurn;
 	}
-
-
+	
 	public void setMyTurn(boolean myTurn) {
 		this.myTurn = myTurn;
 	}
-	
 
 }

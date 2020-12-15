@@ -6,13 +6,8 @@ public enum Colors {
 
 	BLACK(Color.BLACK),
 	WHITE(Color.WHITE),
-	RED(Color.RED),
-	ORANGE(new Color(255,144,0)),
-	PURPLE(new Color(128,100,162)),
-	GREEN(Color.GREEN);
+	RED(Color.RED);
 	
-	
-	//properties
 	private Color color;
 	
 	//Constructor
@@ -24,24 +19,14 @@ public enum Colors {
 		return this.color;
 	}
 	
-	public static Color getMyDefaultColor(int ID){
-		if(ID==1){
+	public static Color getMyColor(int colorID){
+		if(colorID==1){
 			return RED.getColor();
 		}
-		else if(ID==2){
-			return ORANGE.getColor();
+		else if(colorID==2){
+			return WHITE.getColor();
 		}
 		
-		return null;
-	}
-	
-	public static Color getFocusedColor(int ID){
-		if(ID==1){
-			return PURPLE.getColor();
-		}
-		else if(ID==2){
-			return GREEN.getColor();
-		}		
 		return null;
 	}
 }

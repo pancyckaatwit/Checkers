@@ -21,20 +21,14 @@ import Client.Tile;
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			super.mousePressed(e);
-			
-			
+	
 			try{			
-				if(controller.isPlayersTurn()){
-					
+				if(controller.isPlayersTurn()) {
 					highlightSelectPiece(e);
-				
-				}else{
-					
-					JOptionPane.showMessageDialog(null, "Opponent must make a move",
-						"Error", JOptionPane.ERROR_MESSAGE, null);
+				}else {
+					JOptionPane.showMessageDialog(null, "Opponent must make a move", "Error", JOptionPane.ERROR_MESSAGE, null);
 				}
-			}catch(Exception ex){
-				
+			}catch(Exception ex) {
 				System.out.println("Error");
 			}	
 			
@@ -46,18 +40,14 @@ import Client.Tile;
 				tilePanel = (TilePanel) e.getSource();
 				Tile tile = tilePanel.getTile();
 				
-				//if square is already selected - deselect
 				if(tile.isSelected()){
-					
 					System.out.println("deselect - "+tile.getTileID());
 					controller.tileDeselected();				
 				}else {
-					
 					System.out.println("select - "+tile.getTileID());
 					controller.tileSelected(tile);
 				}
 			}catch(Exception ex){
-				
 				System.out.println("error");
 			}
 		}

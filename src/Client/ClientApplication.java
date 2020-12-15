@@ -25,9 +25,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-
-
-
 public class ClientApplication extends JFrame {
 	
 	//this is a default serialVersionUID
@@ -56,20 +53,18 @@ public class ClientApplication extends JFrame {
 			address = pm.getAddress();
 			port = pm.getPort();
 
-			String name = (String) JOptionPane.showInputDialog(null, "Enter your name to Connect", "Connect to Server",
-					JOptionPane.OK_CANCEL_OPTION);
+			String name = (String) JOptionPane.showInputDialog(null, "Enter your name to Connect", "Connect to Server", JOptionPane.OK_CANCEL_OPTION);
 
 			if (name != null && name.length() > 0) {
 				player = new Player(name);
 				connect();
 			} else {
-				JOptionPane.showMessageDialog(null, "Please enter valid name", "Error", JOptionPane.ERROR_MESSAGE,
-						null);
+				JOptionPane.showMessageDialog(null, "Please enter valid name", "Error", JOptionPane.ERROR_MESSAGE, null);
 				System.exit(0);
 			}
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "Please enter valid IPv4-Address", "Error", JOptionPane.ERROR_MESSAGE,
-					null);
+			System.out.println(ex.getMessage());
+			JOptionPane.showMessageDialog(null, "Please enter valid IPv4-Address", "Error", JOptionPane.ERROR_MESSAGE, null);
 			System.exit(0);
 		}
 
@@ -80,7 +75,7 @@ public class ClientApplication extends JFrame {
 		try {
 			connection = new Socket(address, port);
 
-			// Should error occurs, handle it in a separate thread (under try)
+			// Should error occurs, handle it in a separate thread
 			fromServer = new DataInputStream(connection.getInputStream());
 			toServer = new DataOutputStream(connection.getOutputStream());
 
@@ -92,12 +87,10 @@ public class ClientApplication extends JFrame {
 
 			new Thread(task).start();
 		} catch (UnknownHostException e) {
-			JOptionPane.showMessageDialog(null, "Internal Server Error - Check your IPv4-Address", "Error",
-					JOptionPane.ERROR_MESSAGE, null);
+			JOptionPane.showMessageDialog(null, "Internal Server Error - Check your IPv4-Address", "Error", JOptionPane.ERROR_MESSAGE, null);
 			System.exit(0);
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Couldn't connect to Server. Please try again", "Error",
-					JOptionPane.ERROR_MESSAGE, null);
+			JOptionPane.showMessageDialog(null, "Couldn't connect to Server. Please try again", "Error", JOptionPane.ERROR_MESSAGE, null);
 			System.exit(0);
 		}
 	}
@@ -114,8 +107,5 @@ public class ClientApplication extends JFrame {
 
 	private void add(BoardPanel boardPanel) {
 		this.boardPanel.add(boardPanel);
-		
 	}
-
-
 }

@@ -1,4 +1,6 @@
 package Client;
+import java.io.IOException;
+
 import javax.swing.*;
 
 
@@ -10,10 +12,10 @@ public class ClientMain {
 		
 		ClientApplication client = new ClientApplication();
 		
-		client.setTitle("Checkers");
+		client.setTitle("Checkers Client");
 		client.pack();
 		client.setVisible(true);
-		client.setLocation(250, 150);
+		client.setLocation(200, 100);
 		client.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

@@ -21,7 +21,7 @@ public class BoardPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Dimension panelSize = new Dimension(720,720);
+	private Dimension panelSize = new Dimension(800,800);
 	private Board boardModel;
 	private MouseController listener;
 	private LinkedList<TilePanel> panels;
@@ -48,19 +48,18 @@ public class BoardPanel extends JPanel {
 				if(tPanel.getTile().isPossibleToMove() || tPanel.getTile().getPlayerID()==SessionVariable.myID.getValue()){
 					tPanel.addMouseListener(listener);
 				}
-				panels.add(tPanel);				
+				panels.add(tPanel);
+				add(tPanel);
 			}			
 		}
 	}
 	
 	public void repaintPanels(){
 		for(TilePanel panel : panels){
-			panel.setListener(listener);	
+			panel.setListener(listener);
 		}
-		
 		repaint();
 	}
-
 	
 	public LinkedList<Tile> getPlayableTiles(Tile t){
 		return boardModel.findPlayableTiles(t);		

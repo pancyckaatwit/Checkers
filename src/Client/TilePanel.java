@@ -18,7 +18,6 @@ public class TilePanel extends JPanel {
 		
 		private Tile tile;
 		private Border defaultBorder = BorderFactory.createEtchedBorder(WHEN_FOCUSED, Color.black, Color.gray);
-		private Border thickBorder = BorderFactory.createLineBorder(Colors.PURPLE.getColor(),5);
 		private boolean focused;
 		private MouseHandler handler;
 		
@@ -43,14 +42,14 @@ public class TilePanel extends JPanel {
 			//fill piece color
 			int squareplayerID = tile.getPlayerID();
 			if(isClicked()){
-				g2.setColor(Colors.getFocusedColor(squareplayerID));
+				g2.setColor(Colors.getMyColor(squareplayerID));
 				paint(g2);
 			}else{
 				if(squareplayerID==1 || squareplayerID == 2){
 					if(focused){
-						g2.setColor(Colors.getFocusedColor(squareplayerID));
+						g2.setColor(Colors.getMyColor(squareplayerID));
 					}else{
-						g2.setColor(Colors.getMyDefaultColor(squareplayerID));					
+						g2.setColor(Colors.getMyColor(squareplayerID));					
 					}
 					paint(g2);
 				}
@@ -59,7 +58,7 @@ public class TilePanel extends JPanel {
 			//Hover effect for possible move
 			if(tile.isPossibleToMove()){
 				if(focused){				
-					setBorder(thickBorder);
+					setBorder(defaultBorder);
 				}else{				
 					setBorder(null);
 				}
@@ -107,11 +106,10 @@ public class TilePanel extends JPanel {
 			this.tile.setSelected(true);
 		}
 		
-		
-//		private void paint(Graphics2D g2){
-//			int padding= 24;
-//			g2.fillOval(padding/2, padding/2, getWidth()-padding, getHeight()-padding);			
-//		}
+		private void paint(Graphics2D g2){
+			int padding= 24;
+			g2.fillOval(padding/2, padding/2, getWidth()-padding, getHeight()-padding);			
+		}
 		
 		/**
 		 * Mouse Listener 

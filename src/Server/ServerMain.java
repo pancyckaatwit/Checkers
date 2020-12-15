@@ -10,8 +10,6 @@ public class ServerMain {
 		server.setVisible(true);
 		server.setTitle("Checkers Server");
 		server.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		//start Connection
 		server.startRunning();
 	}
 }

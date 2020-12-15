@@ -28,7 +28,7 @@ import Client.Tile;
 		//Data
 		private LinkedList<Tile> selectedTiles;
 		private LinkedList<Tile> validTiles;
-		//private LinkedList<Square> crossableSquares;
+		private LinkedList<Tile> crossableSquares;
 		
 		public Controller(Player player, DataInputStream input, DataOutputStream output){
 			this.player = player;
