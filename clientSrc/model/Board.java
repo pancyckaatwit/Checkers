@@ -1,12 +1,15 @@
-package Client;
-
+package model;
 import java.util.LinkedList;
-import Client.Tile;
 
-/*
- * Class for the board to be played on
+
+import constant.Checkers;
+
+/**
+ * Client Application -> Board
+ * @author Jake Giguere
+ * 
+ * Board Model
  */
-
 public class Board {
 	
 private Tile[][] tiles;

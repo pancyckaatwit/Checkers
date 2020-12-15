@@ -1,6 +1,16 @@
-package Client;
+package model;
 
+import constant.Checkers;
+import constant.SessionVariable;
+
+/**
+ * Client Application -> ClientApp
+ * @author Jake Giguere
+ * 
+ * ClientApp
+ */
 public class Tile {
+	
 	private int TileID;
 	private int TileRow;
 	private int TileColumn;	
