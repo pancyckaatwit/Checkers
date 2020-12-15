@@ -25,11 +25,10 @@ import ClientSetup.Tile;
 public class TilePanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-
-	private static final int WHEN_FOCUSED = 0;
 	
 	private Tile tile;
-	private Border defaultBorder = BorderFactory.createEtchedBorder(WHEN_FOCUSED, Color.black, Color.gray);
+	private Border defaultBorder = BorderFactory.createEtchedBorder(WHEN_FOCUSED, Color.white, Color.black);
+	private Border thickBorder = BorderFactory.createLineBorder(Colors.WHITE.getColor(),5);
 	private boolean focused;
 	private MouseHandler handler;
 	
@@ -52,16 +51,16 @@ public class TilePanel extends JPanel {
 		}
 		
 		//fill piece color
-		int squareplayerID = tile.getPlayerID();
+		int tileplayerID = tile.getPlayerID();
 		if(isClicked()){
-			g2.setColor(Colors.getFocusedColor(squareplayerID));
+			g2.setColor(Colors.getColor(tileplayerID));
 			paint(g2);
 		}else{
-			if(squareplayerID==1 || squareplayerID == 2){
+			if(tileplayerID==1 || tileplayerID == 2){
 				if(focused){
-					g2.setColor(Colors.getFocusedColor(squareplayerID));
+					g2.setColor(Colors.getColor(tileplayerID));
 				}else{
-					g2.setColor(Colors.getDefaultColor(squareplayerID));					
+					g2.setColor(Colors.getColor(tileplayerID));					
 				}
 				paint(g2);
 			}
@@ -124,27 +123,28 @@ public class TilePanel extends JPanel {
 	}
 	
 	/**
-	 * Mouse Listener 
+	 * Mouse Controller 
 	 */
 	class MouseHandler extends MouseAdapter {
 		
 		public void mouseEntered(MouseEvent e){	
 			super.mouseEntered(e);
 			focused = true;
+			repaint();
 		}
 		
 		public void mouseExited(MouseEvent e){
 			super.mouseExited(e);
 			focused = false;
+			repaint();
 		}
 		
 		public void mousePressed(MouseEvent e) {
 			if(isClicked()){
-				System.out.println("deselect - "+tile.getTileID());
+				
 				resetClicked();
 			}
 			else if(tile.getPlayerID()==SessionVariable.myID.getValue()){
-				System.out.println("select - "+tile.getTileID());
 				setClicked();	
 			}
 		}

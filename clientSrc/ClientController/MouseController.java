@@ -43,10 +43,8 @@ public class MouseController extends MouseAdapter{
 			Tile tile = tilePanel.getTile();
 			
 			if(tile.isSelected()){
-				System.out.println("deselect - "+tile.getTileID());
 				controller.tileDeselected();				
 			}else {
-				System.out.println("select - "+tile.getTileID());
 				controller.tileSelected(tile);
 			}
 		}catch(Exception ex){

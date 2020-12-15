@@ -140,7 +140,7 @@ public class Controller implements Runnable {
 	{
 		player.setMyTurn(true);
 		while(waitingForAction){
-			Thread.sleep(100);
+			Thread.sleep(1000);
 		}
 		waitingForAction = true;		
 	}
@@ -159,7 +159,6 @@ public class Controller implements Runnable {
 			} 
 		catch (IOException e)
 			{
-			System.out.println("Sending failed");
 			}		
 	}
 	

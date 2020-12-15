@@ -3,19 +3,12 @@ package ClientCheckers;
 import java.awt.Color;
 
 /**
- *
- *
- * 
  * Colors
  */
 public enum Colors {
 	BLACK(Color.BLACK),
 	WHITE(Color.WHITE),
-	GREEN(Color.GREEN),
-	BLUE(Color.BLUE),
-	MAGENTA(Color.MAGENTA),
-	YELLOW(Color.YELLOW);
-	
+	RED(Color.RED);
 	
 	//properties
 	private Color color;
@@ -29,12 +22,12 @@ public enum Colors {
 		return this.color;
 	}
 	
-	public static Color getDefaultColor(int ID){
+	public static Color getColor(int ID){
 		if(ID==1){
-			return GREEN.getColor();
+			return RED.getColor();
 		}
 		else if(ID==2){
-			return BLUE.getColor();
+			return WHITE.getColor();
 		}
 		
 		return null;
@@ -42,10 +35,10 @@ public enum Colors {
 	
 	public static Color getFocusedColor(int ID){
 		if(ID==1){
-			return MAGENTA.getColor();
+			return RED.getColor();
 		}
 		else if(ID==2){
-			return YELLOW.getColor();
+			return WHITE.getColor();
 		}		
 		return null;
 	}

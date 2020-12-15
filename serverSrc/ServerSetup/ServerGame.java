@@ -18,26 +18,31 @@ private Tile[][] tiles;
 		assignPlayerIDs();
 	}
 	
-	private void initializeTiles() {
+	private void initializeTiles() 
+		{
 		boolean rowFirstOccupied;
 		boolean isOccupied;
 		int counter=0;
 		
 		//For loop to set the rows
-		for(int i=0;i<Checkers.NUM_ROWS.getValue();i++){
+		for(int i=0;i<Checkers.NUM_ROWS.getValue();i++)
+			{
 			rowFirstOccupied = (i%2 == 1) ? true : false;
 				
 			//For loop to set the columns
-			for(int j=0;j<Checkers.NUM_COLS.getValue();j++){
-				isOccupied = (rowFirstOccupied && j%2 == 0) ? true : (!rowFirstOccupied && j%2 == 1) ? true : false;
+			for(int j=0;j<Checkers.NUM_COLS.getValue();j++)
+				{
+				isOccupied = (rowFirstOccupied && j%2 == 0) ?
+						true : (!rowFirstOccupied && j%2 == 1) ? true : false;
 				counter++;
 					
 				tiles[i][j] = new Tile(counter, i, j, isOccupied);
-			}
-		}		
-	}
+				}
+			}		
+		}
 	
-	private void assignPlayerIDs() {
+	private void assignPlayerIDs() 
+		{
 		//Rows 0-2 for player ONE
 		for(int i=0;i<3;i++) {					
 			//For loop for columns
