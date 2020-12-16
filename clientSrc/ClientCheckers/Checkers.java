@@ -1,7 +1,7 @@
 package ClientCheckers;
 
 /**
- * Client Application
+ * @author Jake Giguere
  * 
  * Checker Constants
  */

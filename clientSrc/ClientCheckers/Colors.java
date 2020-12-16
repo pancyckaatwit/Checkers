@@ -3,7 +3,9 @@ package ClientCheckers;
 import java.awt.Color;
 
 /**
- * Colors
+ * @author Jake Giguere
+ * 
+ * Colors for the game
  */
 public enum Colors {
 	BLACK(Color.BLACK),

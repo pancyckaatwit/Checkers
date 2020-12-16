@@ -2,6 +2,11 @@ package ClientCheckers;
 
 import ClientController.MouseController;
 
+/**
+ * 
+ * @author Jake Giguere
+ *
+ */
 public enum SessionVariable
 	{
 	

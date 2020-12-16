@@ -12,6 +12,11 @@ import javax.swing.border.Border;
 import ClientSetup.Tile;
 import ClientView.TilePanel;
 
+/**
+ * 
+ * @author Jake Giguere
+ *
+ */
 public class MouseController extends MouseAdapter{
 	
 	private TilePanel tilePanel;

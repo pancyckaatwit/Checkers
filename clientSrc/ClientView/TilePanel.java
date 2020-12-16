@@ -17,10 +17,10 @@ import ClientController.MouseController;
 import ClientSetup.Tile;
 
 /**
- * Client Application -> SquarePanel
+ *
  * @author Jake Giguere
  * 
- * Square Panel
+ * Tile Panel on Board UI
  */
 public class TilePanel extends JPanel {
 	

@@ -14,7 +14,8 @@ import ClientView.BoardPanel;
 import ServerSetup.ServerPlayer;
 
 /**
- * Client Application -> Controller
+ * @author Jake Giguere
+ * 
  * The controller class 
  * 
  * ClientApp

@@ -4,10 +4,10 @@ import ClientCheckers.Checkers;
 import ClientCheckers.SessionVariable;
 
 /**
- * Client Application -> ClientApp
+ * 
  * @author Jake Giguere
  * 
- * ClientApp
+ * ClientApplication
  */
 public class Tile {
 	

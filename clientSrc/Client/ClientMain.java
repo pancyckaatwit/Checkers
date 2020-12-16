@@ -4,10 +4,10 @@ import javax.swing.*;
 import ClientView.BoardPanel;
 
 /**
-
+ *
+ * @author Jake Giguere
  * 
- * Main
- */
+ **/
 public class ClientMain {
 	
 	public static void main(String[] args)

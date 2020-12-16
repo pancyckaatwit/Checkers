@@ -3,6 +3,7 @@ package ClientSetup;
 import ClientCheckers.SessionVariable;
 
 /**
+ * 
  * @author  Jake Giguere
  * 
  */

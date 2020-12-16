@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * 
+ * @author Jake Giguere
+ *
+ */
 public class PropertyManager {
 
 	private static PropertyManager INSTANCE = null;

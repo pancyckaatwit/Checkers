@@ -14,10 +14,9 @@ import ClientSetup.Board;
 import ClientSetup.Tile;
 
 /**
- * Client Application -> ClientApp
+ * @author Jake Giguere
  * 
- * 
- * ClientApp
+ * Client Application
  */
 public class BoardPanel extends JPanel {
 
