@@ -70,8 +70,7 @@ public class ServerApp extends JFrame {
 				Socket player2 = serverSocket.accept();
 				info.append("Player2 has joined");
 				
-				
-				//Player 2 connection confirmed
+				//Player 2 connecteds confirmation
 				new DataOutputStream(player2.getOutputStream()).writeInt(Checkers.PLAYER_TWO.getValue());
 				
 				//Increases Thread number

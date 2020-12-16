@@ -16,57 +16,94 @@ import ClientSetup.Tile;
 /**
  * @author Jake Giguere
  * 
- * Client Application
+ * boardPanel class initializes the tile panels throughout
+ * the game using the dot product algorithm creates a list of panels
  */
 public class BoardPanel extends JPanel {
 
-private static final long serialVersionUID = 1L;
-	
-	private Dimension panelSize = new Dimension(800,800);
-	private Board boardModel;
-	private MouseController listener;
-	private LinkedList<TilePanel> panels;
-	private Tile[][] tiles;
+	private static final long serialVersionUID = 1L;
 
-	public BoardPanel(MouseController listener) {
-		setPreferredSize(panelSize);
-		setLayout(new GridLayout(8,8));
-		
-		boardModel = new Board();
-		tiles = boardModel.getTiles();
-		this.listener = listener;		
-		panels=new LinkedList<TilePanel>();		
-		
-		initializeTilePanels();
-		
-		System.out.println(boardModel.getTotalTiles());		
-	}
+	private Tile[][] tiles;
+	private Dimension panelSize = new Dimension(800,800);
 	
-	private void initializeTilePanels() {
-		for(int i=0;i<8;i++){
-			for(int k=0;k<8;k++){
-				TilePanel tPanel = new TilePanel(tiles[i][k]);
-				if(tPanel.getTile().isPossibleToMove() || tPanel.getTile().getPlayerID()==SessionVariable.myID.getValue()){
-					tPanel.addMouseListener(listener);
-				}
-				panels.add(tPanel);
-				add(tPanel);
+	private Board boardModel;
+	
+	private MouseController mouseControl;
+	
+	private LinkedList<TilePanel> panels;
+	
+	private void initializeTilePanels()
+		{
+		for(int i=0;i<8;i++)
+			{
+			
+			for(int j=0;j<8;j++)
+				{
+				
+				TilePanel tilePanel = new TilePanel(tiles[i][j]);
+				
+				if(tilePanel.getTile().getPlayerID()==SessionVariable.myID.getValue()||
+						tilePanel.getTile().isPossibleToMove())
+					{
+					
+					tilePanel.addMouseListener(mouseControl);
+					
+					}
+				
+				panels.add(tilePanel);
+				
+				add(tilePanel);
 			}			
 		}
 	}
 	
-	public void repaintPanels(){
-		for(TilePanel panel : panels){
-			panel.setListener(listener);
+	public BoardPanel(MouseController listener)
+		{
+		
+		boardModel = new Board();
+		
+		tiles = boardModel.getTiles();
+		
+		setPreferredSize(panelSize);
+		
+		setLayout(new GridLayout(8,8));
+		
+
+		
+		this.mouseControl = listener;		
+		
+		panels = new LinkedList<TilePanel>();		
+		
+		initializeTilePanels();
+		
+		System.out.println(boardModel.getTotalTiles());		
 		}
+	
+	public void repaintPanels()
+		{
+		
+		for(TilePanel panel : panels)
+			{
+			
+			panel.setListener(mouseControl);
+			
+			}
+		
 		repaint();
+		
 	}
 	
-	public LinkedList<Tile> getPlayableTiles(Tile t){
-		return boardModel.findPlayableTiles(t);		
-	}
+	public LinkedList<Tile> getPlayableTiles(Tile tile)
+		{
+		
+		return boardModel.findPlayableTiles(tile);	
+		
+		}
 	
-	public Tile getTile(int ID){
+	public Tile getTile(int ID)
+		{
+		
 		return panels.get(ID-1).getTile();
-	}
+		
+		}
 }

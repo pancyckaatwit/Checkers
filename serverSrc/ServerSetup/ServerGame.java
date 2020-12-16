@@ -81,9 +81,9 @@ private Tile[][] tiles;
 
 	public Tile getTile(int from) {
 		for(Tile[] sRows:tiles){
-			for(Tile s: sRows){
-				if(s.getTileID()==from){
-					return s;
+			for(Tile t: sRows){
+				if(t.getTileID()==from){
+					return t;
 				}
 					
 			}
@@ -95,18 +95,17 @@ private Tile[][] tiles;
 		
 		int playerOne = 0;
 		int playerTwo = 0;
-		for(int r=0;r<Checkers.NUM_ROWS.getValue();r++){
-			for(int c=0;c<Checkers.NUM_COLS.getValue();c++){
-				if(tiles[r][c].getPlayerID()==1)
+		for(int i=0;i<Checkers.NUM_ROWS.getValue();i++){
+			for(int j=0;j<Checkers.NUM_COLS.getValue();j++){
+				if(tiles[i][j].getPlayerID()==1)
 					playerOne++;
 				
-				if(tiles[r][c].getPlayerID()==2)
+				if(tiles[i][j].getPlayerID()==2)
 					playerTwo++;
 			}
 		}
-		
-		System.out.println("Player 1 has " + playerOne);
-		System.out.println("Player 2 has " + playerTwo);
+		System.out.println("Player 1 has: " + playerOne);
+		System.out.println("Player 2 has: " + playerTwo);
 	}
 	
 	public boolean isOver(){
@@ -126,7 +125,6 @@ private Tile[][] tiles;
 		if(playerOne==0 || playerTwo==0){
 			return true;
 		}
-		
 		return false;
 	}
 }

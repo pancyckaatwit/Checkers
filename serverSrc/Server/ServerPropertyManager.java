@@ -11,14 +11,14 @@ import java.util.Properties;
 public class ServerPropertyManager {
 
 	private static ServerPropertyManager INSTANCE = null;
-	private Properties prop;
+	private Properties property;
 	
 	private ServerPropertyManager() throws IOException{
-		prop = new Properties();
+		property = new Properties();
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("ServerPort.properties");
 		
 		if(inputStream != null){
-			prop.load(inputStream);
+			property.load(inputStream);
 		}
 	}
 	
@@ -30,7 +30,7 @@ public class ServerPropertyManager {
 	}
 	
 	public int getPort(){
-		return Integer.parseInt(prop.getProperty("port"));
+		return Integer.parseInt(property.getProperty("port"));
 	}
 	
 }

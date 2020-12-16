@@ -27,7 +27,6 @@ public class HandleSession implements Runnable {
 	public HandleSession(Socket p1, Socket p2){
 		player1 = new ServerPlayer(Checkers.PLAYER_ONE.getValue(), p1);
 		player2 = new ServerPlayer(Checkers.PLAYER_TWO.getValue(), p2);
-		
 		checkers = new ServerGame();
 	}
 	
@@ -56,12 +55,10 @@ public class HandleSession implements Runnable {
 					
 					//If the game is over, break
 					if(checkers.isOver()){
-						player1.sendData(Checkers.WINNER.getValue());
+						player1.sendData(Checkers.YOU_WIN.getValue());
 						continueToPlay=false;
 						break;
 					}
-					
-					System.out.println("after break");
 					
 					//Now waits for the 2nd players action
 					from = player2.receiveData();
@@ -72,7 +69,7 @@ public class HandleSession implements Runnable {
 					//Send Data back to 1st Player
 					if(checkers.isOver()) {
 						//Game Over notification
-						player1.sendData(Checkers.YOU_LOST.getValue());
+						player1.sendData(Checkers.YOU_WIN.getValue());
 					}					
 					fromStatus = player1.sendData(from);
 					toStatus = player1.sendData(to);
@@ -80,23 +77,17 @@ public class HandleSession implements Runnable {
 					
 					//If the game is over, it breaks
 					if(checkers.isOver()){
-						player2.sendData(Checkers.WINNER.getValue());
+						player2.sendData(Checkers.YOU_WIN.getValue());
 						continueToPlay=false;
 						break;
 					}
-					
-					System.out.println("second break");
 				}
-				
-				
-				
 		}catch(Exception ex){
-			System.out.println("Connection is being closed");
-			
+			System.out.println("Connection is ending");
+			//Game only works when both players are connected, otherwise it will end
 			if(player1.isOnline()) {
 				player1.closeConnection();
 			}
-			
 			if(player2.isOnline()) {
 				player2.closeConnection();
 			}
@@ -106,7 +97,7 @@ public class HandleSession implements Runnable {
 	
 	private void checkStatus(int status, int status2) throws Exception{
 		if(status==99 || status2==99){
-			throw new Exception("Connection is lost");
+			throw new Exception("Connection has stopped");
 		}
 	}
 	
@@ -122,10 +113,9 @@ public class HandleSession implements Runnable {
 	private void checkCrossJump(Tile from, Tile to){		
 		if(Math.abs(from.getTileRow()-to.getTileRow())==2){		
 			int middleRow = (from.getTileRow() + to.getTileRow())/2;
-			int middleCol = (from.getTileColumn() + to.getTileColumn())/2;
-			
-			Tile middleSquare = checkers.getTile((middleRow*8)+middleCol+1);
-			middleSquare.setPlayerID(Checkers.EMPTY_TILE.getValue());
+			int middleColumn = (from.getTileColumn() + to.getTileColumn())/2;
+			Tile middleTile = checkers.getTile((middleRow*8)+middleColumn+1);
+			middleTile.setPlayerID(Checkers.EMPTY_TILE.getValue());
 		}
 	}
 }
