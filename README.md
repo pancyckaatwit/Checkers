@@ -1,6 +1,6 @@
 <h1> Introduction</h1>
 This project is on the game Checkers. Checkers is a game with two players and when a player takes all of the other players pieces that player wins. The game played on a 8x8 board
-and each player has 12 pieces for a total of 24. Our game is played using a socket connection.
+and each player has 12 pieces for a total of 24. You move a piece by double clicking it then clicking a viable tile, which will be highlighted. Our game is played using a socket connection.
 <h1> Features</h1>
 <ul>
  <li>New player enters name</li>
