@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.Socket;
 
 /**
+ * @author Alexander Pancyck
+ * 
  * ServerPlayer deals with the data that are 
  * sent and received to and from the player 
  */

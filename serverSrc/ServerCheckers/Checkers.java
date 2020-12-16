@@ -1,10 +1,10 @@
 package ServerCheckers;
 
 /**
- * Server Application 
+ * 
+ * @author Alexander Pancyck
  * 
  * 
- * Checker Constants
  */
 public enum Checkers {	
 	

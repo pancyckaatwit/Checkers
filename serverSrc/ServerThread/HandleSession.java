@@ -11,7 +11,7 @@ import java.net.*;
 import java.awt.*;
 
 /**
- * Server Application --> Handle Session
+ * @author Alexander Pancyck
  * 
  * Handle Game Logic and Player requests
  */

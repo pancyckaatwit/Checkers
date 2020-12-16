@@ -3,10 +3,9 @@ import ClientSetup.Tile;
 import ServerCheckers.*;
 
 /**
- * Server Application -> Game
- *@author Alex Pancyck
  * 
- * Game Model
+ *@author Alexander Pancyck
+ * 
  */
 public class ServerGame {
 private Tile[][] tiles;
