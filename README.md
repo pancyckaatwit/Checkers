@@ -18,5 +18,5 @@ All you need to do to install is copy the code into your chosen IDE. For this pr
 <h1> Demo Video</h1>
 https://www.youtube.com/watch?v=7ErPoOZS4kk&feature=youtu.be
 <h1> Contributors</h1>
-Alexander Pancyck
+Alexander Pancyck,
 Jake Giguere
