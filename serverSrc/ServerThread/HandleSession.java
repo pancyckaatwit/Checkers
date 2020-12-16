@@ -38,15 +38,11 @@ public class HandleSession implements Runnable {
 				player1.sendData(1);				
 				
 				while(continueToPlay){
-					//wait for player 1's Action
 					int from = player1.receiveData();
 					int to = player1.receiveData();
 					checkStatus(from, to);
 					updateGameModel(from, to);
-							
-					//Send the Data back to 2nd Player
 					if(checkers.isOver()) {
-						//Game Over notification
 						player2.sendData(Checkers.YOU_LOST.getValue());
 					}
 					int fromStatus = player2.sendData(from);

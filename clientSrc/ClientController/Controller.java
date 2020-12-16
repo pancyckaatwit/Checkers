@@ -63,7 +63,7 @@ public class Controller implements Runnable {
 				{
 				//wait for the notification to start
 				fromServer.readInt();
-				player.setMyTurn(true);
+				player.setPlayerTurn(true);
 				
 				}//END IF
 					
@@ -123,7 +123,7 @@ public class Controller implements Runnable {
 	
 	private void receiveInfoFromServer() throws IOException
 	{
-		player.setMyTurn(false);
+		player.setPlayerTurn(false);
 		int from = fromServer.readInt();
 		
 		if(from==Checkers.YOU_LOST.getValue())
@@ -166,7 +166,7 @@ public class Controller implements Runnable {
 	private void waitForPlayerAction() throws InterruptedException
 		{
 		
-		player.setMyTurn(true);
+		player.setPlayerTurn(true);
 		
 		while(responseWaiting)
 			{
@@ -286,7 +286,7 @@ public class Controller implements Runnable {
 	public boolean isPlayersTurn()
 		{
 		
-		return player.isMyTurn();
+		return player.isPlayerTurn();
 		
 		}
 	

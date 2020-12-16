@@ -17,7 +17,7 @@ public class Player {
 	public Player(String name){
 		this.name = name;
 		
-		setMyTurn(false);
+		setPlayerTurn(false);
 	}
 
 	public String getName(){
@@ -35,16 +35,13 @@ public class Player {
 	}
 
 
-	public boolean isMyTurn() {
+	public boolean isPlayerTurn() {
 		return myTurn;
 	}
 
 
-	public void setMyTurn(boolean myTurn) {
+	public void setPlayerTurn(boolean myTurn) {
 		this.myTurn = myTurn;
 	}
-	
-
-	
 	
 }
