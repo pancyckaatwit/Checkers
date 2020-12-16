@@ -10,8 +10,7 @@ import java.io.*;
 import java.net.*;
 
 /**
- * Server Application -> ServerApp
- * @author Alex Pancyck
+ * @author Alexander Pancyck
  * 
  * This class will establish a Server socket
  * then wait for players to connect. After two players

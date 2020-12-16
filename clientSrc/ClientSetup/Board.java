@@ -4,10 +4,8 @@ import java.util.LinkedList;
 import ClientCheckers.Checkers;
 
 /**
- * Client Application -> Board
  * @author Jake Giguere
  * 
- * Board Model
  */
 public class Board {
 	

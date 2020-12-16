@@ -2,8 +2,8 @@ package Server;
 import javax.swing.JFrame;
 
 /**
- * Server Application -> Main
- * @author
+ * @author Alexander Pancyck
+ * 
  */
 public class ServerMain {
 

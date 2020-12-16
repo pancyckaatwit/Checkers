@@ -3,10 +3,8 @@ package ClientSetup;
 import ClientCheckers.SessionVariable;
 
 /**
- * Client Application -> Player
- * @author  Siyar
+ * @author  Jake Giguere
  * 
- * Board Model
  */
 public class Player {
 	

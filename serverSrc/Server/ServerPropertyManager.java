@@ -3,6 +3,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * 
+ * @author Alexander Pancyck
+ *
+ */
 public class ServerPropertyManager {
 
 	private static ServerPropertyManager INSTANCE = null;
