@@ -16,7 +16,7 @@ All you need to do to install is copy the code into your chosen IDE. For this pr
 <li>Run the class ClientMain to start a client connection. You will need to run this class two times to get two players.</li>
 </ol>
 <h1> Demo Video</h1>
-
+https://www.youtube.com/watch?v=7ErPoOZS4kk&feature=youtu.be
 <h1> Contributors</h1>
 Alexander Pancyck
 Jake Giguere
