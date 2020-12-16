@@ -16,6 +16,26 @@ private Tile[][] tiles;
 		initializeTiles();
 		assignPlayerIDs();
 	}
+
+	public Tile getTile(int from) {
+		for(Tile[] sRows:tiles){
+			for(Tile t: sRows){
+				if(t.getTileID()==from){
+					return t;
+				}
+					
+			}
+		}		
+		return null;
+	}
+	
+	public Tile[][] getTiles(){
+		return this.tiles;
+	}
+	
+	public int getTotalTiles(){
+		return tiles.length;
+	}
 	
 	private void initializeTiles() 
 		{
@@ -51,7 +71,6 @@ private Tile[][] tiles;
 				}
 			}
 		}
-				
 		//Rows 5-7 for player TWO
 		for(int i=5;i<8;i++){					
 			//For loop for columns
@@ -61,34 +80,6 @@ private Tile[][] tiles;
 				}
 			}
 		}
-	}
-	
-	public Tile[][] getTiles(){
-		return this.tiles;
-	}
-	
-	public int getTotleTiles(){
-		return tiles.length;
-	}
-	
-	public void printTileDetails(){
-		for(int i=0;i<Checkers.NUM_ROWS.getValue();i++){
-			for(int j=0;j<Checkers.NUM_COLS.getValue();j++){
-				System.out.println(tiles[i][j].getTileID() + "--" + tiles[i][j].getTileRow() + "--" + tiles[i][j].getTileColumn() + tiles[i][j].getPlayerID());
-			}
-		}
-	}
-
-	public Tile getTile(int from) {
-		for(Tile[] sRows:tiles){
-			for(Tile t: sRows){
-				if(t.getTileID()==from){
-					return t;
-				}
-					
-			}
-		}		
-		return null;
 	}
 	
 	public void printAvailableSquareDetails(){

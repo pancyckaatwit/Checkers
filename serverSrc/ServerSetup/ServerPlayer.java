@@ -18,6 +18,7 @@ public class ServerPlayer{
 	private DataInputStream fromPlayer;
 	private DataOutputStream toPlayer;
 	
+	//Constructor
 	public ServerPlayer(int ID, Socket s){
 		this.PlayerID = ID;
 		this.socket = s;
@@ -30,6 +31,10 @@ public class ServerPlayer{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean isOnline(){
+		return socket.isConnected();
 	}
 	
 	//Method responsible for sending data
@@ -63,8 +68,5 @@ public class ServerPlayer{
 			e.printStackTrace();
 		}
 	}
-	
-	public boolean isOnline(){
-		return socket.isConnected();
-	}
+
 }
