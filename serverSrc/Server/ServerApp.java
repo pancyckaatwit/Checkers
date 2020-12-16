@@ -1,3 +1,4 @@
+package Server;
 import java.awt.BorderLayout;
 
 import javax.swing.*;
@@ -47,8 +48,8 @@ public class ServerApp extends JFrame {
 		
 		try {
 			
-			ServerPropertyManager pm = ServerPropertyManager.getInstance();
-			int port = pm.getPort();
+			ServerPropertyManager serverProperty = ServerPropertyManager.getInstance();
+			int port = serverProperty.getPort();
 			
 			//Initializes a socket for the server
 			serverSocket = new ServerSocket(port);

@@ -15,26 +15,23 @@ import ServerSetup.ServerPlayer;
 
 /**
  * Client Application -> Controller
- *The controller class 
+ * The controller class 
  * 
  * ClientApp
  */
 public class Controller implements Runnable {
-	private boolean continueToPlay;
-	private boolean waitingForAction;
+	private boolean continueGame;
+	private boolean responseWaiting;
 	private boolean endGame;
-	
-	//Network
-	private DataInputStream fromServer;
-	private DataOutputStream toServer;
-	
+	private LinkedList<Tile> highlightedTiles;
+	private LinkedList<Tile> validTiles;
+
 	private BoardPanel boardPanel;
 	private Player player;
 	
-	//Data
-	private LinkedList<Tile> selectedTiles;
-	private LinkedList<Tile> validTiles;
-	private LinkedList<Tile> crossableSquares;
+	private DataInputStream fromServer;
+	private DataOutputStream toServer;
+	
 	
 	public Controller(Player player, DataInputStream input, DataOutputStream output)
 		{
@@ -42,7 +39,7 @@ public class Controller implements Runnable {
 		this.fromServer = input;
 		this.toServer= output;
 		
-		selectedTiles = new LinkedList<Tile>();
+		highlightedTiles = new LinkedList<Tile>();
 		validTiles = new LinkedList<Tile>();
 		}
 	
@@ -54,55 +51,71 @@ public class Controller implements Runnable {
 	@Override
 	public void run()
 		{
-		continueToPlay = true;
-		waitingForAction = true;
+		continueGame = true;
+		responseWaiting = true;
 		endGame=false;
 		
 		try 
 			{
 			//Player One
 			if(player.getPlayerID()==Checkers.PLAYER_ONE.getValue())
-			{
+				{
 				//wait for the notification to start
 				fromServer.readInt();
 				player.setMyTurn(true);
-			}//END IF
-					
-			while(continueToPlay && !endGame)
-			{
-				if(player.getPlayerID()==Checkers.PLAYER_ONE.getValue())
-				{
-					waitForPlayerAction();
-					if(!endGame)
-						receiveInfoFromServer();
+				
 				}//END IF
-				else if(player.getPlayerID()==Checkers.PLAYER_TWO.getValue())
+					
+			while(!endGame && continueGame)
 				{
+				
+				if(player.getPlayerID()==Checkers.PLAYER_ONE.getValue())
+					{
+					waitForPlayerAction();
+					
+					if(!endGame) 
+						{
+						
+						receiveInfoFromServer();
+						
+						}
+					}//END IF
+				
+				else if(player.getPlayerID()==Checkers.PLAYER_TWO.getValue())
+					{
 					receiveInfoFromServer();
+					
 					if(!endGame)
+						{
+						
 						waitForPlayerAction();
-				}//END ELSE IF
-			}//END WHILE
+						
+						}
+					}//END ELSE IF
+				}//END WHILE
 			
 			if(endGame)
 				{
-				JOptionPane.showMessageDialog(null, "Game is over",
-						"Information", JOptionPane.INFORMATION_MESSAGE, null);
+				
+				JOptionPane.showMessageDialog(null, "This session has ended", "Information", JOptionPane.INFORMATION_MESSAGE, null);
+				
 				System.exit(0);
+				
 				}//end IF
 			
 			}//End try 
+		
 		catch (IOException e)
 			{
 			
-			JOptionPane.showMessageDialog(null, "Connection lost",
-					"Error", JOptionPane.ERROR_MESSAGE, null);
+			JOptionPane.showMessageDialog(null, "Connection lost", "Error", JOptionPane.ERROR_MESSAGE, null);
+			
 			System.exit(0);
 			
 		} catch (InterruptedException e)
 			{
-			JOptionPane.showMessageDialog(null, "Connection has failed",
-					"Error", JOptionPane.ERROR_MESSAGE, null);
+			
+			JOptionPane.showMessageDialog(null, "Connection has failed", "Error", JOptionPane.ERROR_MESSAGE, null);
 			
 			}			
 	}
@@ -114,133 +127,193 @@ public class Controller implements Runnable {
 		
 		if(from==Checkers.YOU_LOST.getValue())
 			{
+			
 			from = fromServer.readInt();
 			int to = fromServer.readInt();
 			updateReceivedInfo(from, to);
 			endGame=true;
+			
 			}
+		
 		else if(from==Checkers.WINNER.getValue())
 			{
+			
 			endGame=true;
-			continueToPlay=false;
-		}else
+			continueGame=false;
+			
+			}
+		
+		else
 			{
+			
 			int to = fromServer.readInt();
+			
 			updateReceivedInfo(from, to);
+			
 			}
 	}	
 
 	private void sendMove(Tile from, Tile to) throws IOException
 		{
+		
 		toServer.writeInt(from.getTileID());
+		
 		toServer.writeInt(to.getTileID());
+		
 		}
 
 	private void waitForPlayerAction() throws InterruptedException
-	{
+		{
+		
 		player.setMyTurn(true);
-		while(waitingForAction){
-			Thread.sleep(1000);
-		}
-		waitingForAction = true;		
-	}
+		
+		while(responseWaiting)
+			{
+			
+			Thread.sleep(100);
+			
+			}//end While
+		responseWaiting = true;		
+		
+		}//end method
 	
-	public void move(Tile from, Tile to){
+	public void move(Tile from, Tile to) throws IOException
+		{
+		
 		to.setPlayerID(from.getPlayerID());
 		from.setPlayerID(Checkers.EMPTY_TILE.getValue());
 		checkCrossJump(from, to);
 		
 		tileDeselected();
 		
-		waitingForAction = false;
-		try
-			{
-			sendMove(from, to);
-			} 
-		catch (IOException e)
-			{
-			}		
-	}
+		responseWaiting = false;
+		sendMove(from, to);
+		
+		}
 	
 	//When a square is selected
-	public void tileSelected(Tile t)
-	{
+	public void tileSelected(Tile t) throws IOException
+		{
 		
-		if(selectedTiles.isEmpty())
+		if(highlightedTiles.isEmpty())
 			{
+			
 			addSelectedTile(t);
-			}		
-		//if one is already selected, check if it is possible move
-		else if(selectedTiles.size()>=1){
-			if(validTiles.contains(t)){
-				move(selectedTiles.getFirst(),t);
-			}else{
+			
+			}	
+		
+		//checking for a possible move
+		else if(highlightedTiles.size()>=1)
+			{
+			
+			if(validTiles.contains(t))
+				
+				{
+				
+				move(highlightedTiles.getFirst(),t);
+				
+				}
+			
+			else
+				{
+				
 				tileDeselected();
+				
 				addSelectedTile(t);
+				
+				}
 			}
 		}
-	}
 	
-	private void addSelectedTile(Tile t){
+	private void addSelectedTile(Tile t)
+		{
+		
 		t.setSelected(true);
-		selectedTiles.add(t);
+		
+		highlightedTiles.add(t);
+		
 		getPlayableTiles(t);
 		
-		
-	}
-
-	public void tileDeselected() {
-		
-		for(Tile tile:selectedTiles)
-			tile.setSelected(false);
-		
-		selectedTiles.clear();
-		
-		for(Tile tile:validTiles){
-			tile.setPossibleToMove(false);
 		}
+
+	public void tileDeselected()
+		{
+		
+		for(Tile tile:highlightedTiles) 
+			{
+			
+			tile.setSelected(false);
+			
+			}
+		
+		highlightedTiles.clear();
+		
+		for(Tile tile:validTiles)
+			{
+			
+			tile.setPossibleToMove(false);
+			
+			}
 		
 		validTiles.clear();
+		
 		boardPanel.repaintPanels();
-	}
+		
+		}
 	
 	
 	private void getPlayableTiles(Tile t)
-	{
-		validTiles.clear();		
+		{
+		
+		validTiles.clear();
+		
 		validTiles = boardPanel.getPlayableTiles(t);
 		
-		for(Tile tile:validTiles){
+		for(Tile tile:validTiles)
+			{
 			
 			System.out.println(tile.getTileID());
-		}		
+			
+			}		
 		
 		boardPanel.repaintPanels();
-	}
+		}
+	
+	
+	
 	
 	public boolean isPlayersTurn()
 		{
 		
 		return player.isMyTurn();
+		
 		}
 	
-	private void checkCrossJump(Tile from, Tile to){		
+	
+	
+	
+	private void checkCrossJump(Tile from, Tile to)
+		{		
 		
 		if(Math.abs(from.getTileRow()-to.getTileRow())==2)
 			{		
 			
-			int middleRow = (from.getTileRow() + to.getTileRow())/2;
-			int middleColumn = (from.getTileColumn() + to.getTileColumn())/2;
+			int midRow = (from.getTileRow() + to.getTileRow())/2;
+			int midColumn = (from.getTileColumn() + to.getTileColumn())/2;
 			
-			Tile middleTile = boardPanel.getTile((middleRow*8)+middleColumn+1);
+			Tile midTile = boardPanel.getTile((midRow*8)+midColumn+1);
 			
-			middleTile.setPlayerID(Checkers.EMPTY_TILE.getValue());
+			midTile.setPlayerID(Checkers.EMPTY_TILE.getValue());
+			
 			}
-	}
+		}
 
 	
-	private void updateReceivedInfo(int from, int to) {
+	private void updateReceivedInfo(int from, int to)
+		{
+		
 		Tile fromTile = boardPanel.getTile(from);
+		
 		Tile toTile = boardPanel.getTile(to);
 		
 		toTile.setPlayerID(fromTile.getPlayerID());
@@ -249,5 +322,6 @@ public class Controller implements Runnable {
 		checkCrossJump(fromTile, toTile);
 		
 		boardPanel.repaintPanels();
-	}
+		
+		}
 }

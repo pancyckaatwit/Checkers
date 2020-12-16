@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
@@ -14,41 +15,69 @@ import ClientView.TilePanel;
 public class MouseController extends MouseAdapter{
 	
 	private TilePanel tilePanel;
-	private Controller controller;
-	
-	public void setController(Controller c){
-		this.controller = c;
-	}
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		super.mousePressed(e);
+    private Controller controller;
 
-		try{			
-			if(controller.isPlayersTurn()) {
-				highlightSelectPiece(e);
-			}else {
-				JOptionPane.showMessageDialog(null, "Opponent must make a move", "Error", JOptionPane.ERROR_MESSAGE, null);
-			}
-		}catch(Exception ex) {
-			System.out.println("Error");
-		}	
-		
-		
-	}
-	
-	private void highlightSelectPiece(MouseEvent e){
-		try{
-			tilePanel = (TilePanel) e.getSource();
-			Tile tile = tilePanel.getTile();
-			
-			if(tile.isSelected()){
-				controller.tileDeselected();				
-			}else {
-				controller.tileSelected(tile);
-			}
-		}catch(Exception ex){
-			System.out.println("error");
-		}
-	}
+    public void setController(Controller c)
+        {
+
+        this.controller = c;
+
+        }
+
+
+    @Override
+    public void mouseClicked(MouseEvent e)
+        {
+
+        super.mousePressed(e);
+
+        try
+            {
+            if(controller.isPlayersTurn())
+                {
+
+                highlightSelectPiece(e);
+
+                }
+            else
+                {
+
+                JOptionPane.showMessageDialog(null, "Opponent must make a move", "Error", JOptionPane.ERROR_MESSAGE, null);
+
+                }
+            }
+        catch(Exception ex)
+            {
+
+            System.out.println("Error");
+
+            }
+
+
+        }
+
+
+    private void highlightSelectPiece(MouseEvent e) throws IOException
+        {
+
+
+            tilePanel = (TilePanel) e.getSource();
+
+            Tile tile = tilePanel.getTile();
+
+            if(tile.isSelected())
+                {
+
+                controller.tileDeselected();
+
+                }
+
+            else 
+                {
+
+                controller.tileSelected(tile);
+
+                }
+            }
+
 }

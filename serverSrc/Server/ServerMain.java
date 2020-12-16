@@ -1,3 +1,4 @@
+package Server;
 import javax.swing.JFrame;
 
 /**
